@@ -5,6 +5,7 @@ import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 //import reactLogo from './assets/react.svg';
 import './App.css';
 import Header from './components/header/header';
+import Footer from './components/footer/footer';
 import Home from './pages/main/main';
 import About from './pages/about/about';
 
@@ -22,7 +23,7 @@ function App() {
           </Routes>
         </main>
       </Router>
-      <footer>Footer</footer>
+      <Footer />
     </div>
   );
 }

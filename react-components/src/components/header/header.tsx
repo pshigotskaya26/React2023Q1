@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-        <div className="header__container">
+        <div className="container">
           <nav className="header__navigation">
             <ul className="navigation">
               <li className="navigation__item">

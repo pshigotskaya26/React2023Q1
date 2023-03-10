@@ -1,0 +1,28 @@
+.footer {
+  background-color: #000000;
+}
+
+.footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.footer-link__github {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.footer-link__rsschool {
+  width: 9rem;
+  height: 3rem;
+}
+
+.icon_github {
+  background-image: url(../../assets/icon-github.svg);
+}
+
+.icon_rsschool {
+  background-image: url(../../assets/icon-rsschool.svg);
+}
