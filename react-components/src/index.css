@@ -67,6 +67,12 @@ ul {
   margin: 0 auto;
 }
 
+@media (max-width: 1285px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
 .main {
   flex: 1 1 auto;
 }
