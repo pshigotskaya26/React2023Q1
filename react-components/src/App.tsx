@@ -5,8 +5,8 @@ import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 //import reactLogo from './assets/react.svg';
 import './App.css';
 import Header from './components/header/header';
-import Home from './pages/main';
-import About from './pages/about';
+import Home from './pages/main/main';
+import About from './pages/about/about';
 
 function App() {
   //const [count, setCount] = useState(0);
@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <main>
+        <main className="main">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
