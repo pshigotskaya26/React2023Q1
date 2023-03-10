@@ -30,12 +30,15 @@ a:hover {
 body {
   margin: 0;
   min-width: 320px;
+  font-size: 18px;
   color: #213547;
   background-color: #ffffff;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 30px;
+  font-weight: normal;
+  color: #646cff;
   line-height: 1.1;
 }
 
