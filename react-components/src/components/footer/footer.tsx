@@ -13,6 +13,7 @@ class Footer extends Component {
           >
             <span className="icon icon_github"></span>
           </a>
+          <p className="footer-text">2023</p>
           <a
             className="footer-link footer-link__rsschool"
             href="https://rs.school/js/"
