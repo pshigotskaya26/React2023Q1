@@ -1,0 +1,7 @@
+.cards__container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 25px;
+}
