@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
 import './index.css';
+import { IProduct } from '../../types/interfaces/IProduct';
+import PropTypes from 'prop-types';
 
-class CardItem extends Component {
+interface CardItemProps {
+  product: IProduct;
+}
+
+class CardItem extends Component<CardItemProps> {
+  constructor(props: CardItemProps) {
+    super(props);
+  }
   render() {
+    console.log(this.props);
     return (
       <div className="card-item">
         <div className="card-item__image">
           <img
             className="card-image"
-            src="https://i.dummyjson.com/data/products/78/thumbnail.jpg"
-            alt=""
+            src={`${this.props.product.thumbnail}`}
+            alt={`${this.props.product.title}`}
           />
         </div>
         <div className="card-item__content">
-          <h3 className="card-item__title">Title of the product</h3>
+          <h3 className="card-item__title">{this.props.product.title}</h3>
           <div className="card-item__description">
             <div className="card-info card-category">
               <span className="card-text card-category__text">Category: </span>
-              <span className="card-value card-category__value">groceries</span>
+              <span className="card-value card-category__value">{this.props.product.category}</span>
             </div>
 
             <div className="card-info card-brand">
               <span className="card-text card-brand__text">Brand: </span>
-              <span className="card-value card-brand__value">Saaf & Khaas</span>
+              <span className="card-value card-brand__value">{this.props.product.brand}</span>
             </div>
 
             <div className="card-info">
               <div className="card-price">
-                <span className="card-price__value">19</span> $
+                <span className="card-price__value">{this.props.product.price}</span> $
               </div>
-              <div className="card-raiting">4.69</div>
+              <div className="card-raiting">{this.props.product.rating}</div>
             </div>
           </div>
         </div>
