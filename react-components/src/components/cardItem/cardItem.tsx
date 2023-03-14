@@ -12,7 +12,6 @@ class CardItem extends Component<CardItemProps> {
     super(props);
   }
   render() {
-    console.log(this.props);
     return (
       <div className="card-item">
         <div className="card-item__image">
