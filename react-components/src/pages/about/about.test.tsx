@@ -10,6 +10,6 @@ describe('Tests for About component', () => {
       screen.getByRole('heading', {
         level: 1,
       })
-    ).toHaveTextContent('About');
+    ).toHaveTextContent('About us');
   });
 });
