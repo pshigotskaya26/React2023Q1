@@ -2,6 +2,10 @@
   padding: 30px 0;
 }
 
+.not-found__title {
+  color: #c9c9c9;
+}
+
 .not-found__container {
   text-align: center;
 }
