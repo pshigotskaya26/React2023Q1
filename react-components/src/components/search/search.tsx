@@ -25,6 +25,7 @@ class Search extends Component {
       <div className="search">
         <div className="search__container">
           <input
+            data-testid="search__input"
             className="search__input"
             type="search"
             placeholder="search something"

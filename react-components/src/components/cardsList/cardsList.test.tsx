@@ -3,7 +3,7 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import CardsList from './cardsList';
 
-describe('Test for CardsList component', () => {
+describe('Tests for CardsList component', () => {
   it('Has CardsList a header h2', () => {
     render(<CardsList />);
     expect(
