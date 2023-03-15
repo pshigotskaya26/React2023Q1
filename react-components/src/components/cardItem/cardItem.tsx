@@ -25,12 +25,16 @@ class CardItem extends Component<CardItemProps> {
           <h3 className="card-item__title">{this.props.product.title}</h3>
           <div className="card-item__description">
             <div className="card-info card-category">
-              <span className="card-text card-category__text">Category: </span>
+              <span data-testid="card-category" className="card-text card-category__text">
+                Category:
+              </span>
               <span className="card-value card-category__value">{this.props.product.category}</span>
             </div>
 
             <div className="card-info card-brand">
-              <span className="card-text card-brand__text">Brand: </span>
+              <span data-testid="card-brand" className="card-text card-brand__text">
+                Brand:
+              </span>
               <span className="card-value card-brand__value">{this.props.product.brand}</span>
             </div>
 
@@ -38,7 +42,9 @@ class CardItem extends Component<CardItemProps> {
               <div className="card-price">
                 <span className="card-price__value">{this.props.product.price}</span> $
               </div>
-              <div className="card-raiting">{this.props.product.rating}</div>
+              <div data-testid="card-raiting" className="card-raiting">
+                {this.props.product.rating}
+              </div>
             </div>
           </div>
         </div>

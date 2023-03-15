@@ -11,7 +11,7 @@ class CardsList extends Component {
     return (
       <div className="cards">
         <h2 className="cards__title">Card's list:</h2>
-        <div className="cards__container">
+        <div data-testid="cards__container" className="cards__container">
           {products.map((productItem) => (
             <CardItem key={productItem.id} product={productItem} />
           ))}
