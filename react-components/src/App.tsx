@@ -29,8 +29,8 @@ export function App() {
 
 export function WrappedApp() {
   return (
-    <HashRouter>
+    <Router>
       <App />
-    </HashRouter>
+    </Router>
   );
 }
