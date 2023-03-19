@@ -4,9 +4,18 @@ import './index.css';
 
 class Header extends Component {
   render() {
+    const pathPage = window.location.pathname.slice(1);
+
     return (
       <header className="header">
         <div className="container">
+          {pathPage === '' ? (
+            <h2>Current page: Home</h2>
+          ) : pathPage === 'about' ? (
+            <h2>Current page: About us</h2>
+          ) : (
+            <h2>Current page: Not Found</h2>
+          )}
           <nav className="header__navigation">
             <ul className="navigation">
               <li className="navigation__item">
