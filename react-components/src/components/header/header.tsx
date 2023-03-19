@@ -8,7 +8,7 @@ class Header extends Component {
 
     return (
       <header className="header">
-        <div className="container">
+        <div className="container header__container">
           {pathPage === '' ? (
             <h2 data-testid="header__title">Current page: Home</h2>
           ) : pathPage === 'about' ? (
