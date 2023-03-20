@@ -13,6 +13,8 @@ class Header extends Component {
             <h2 data-testid="header__title">Current page: Home</h2>
           ) : pathPage === 'about' ? (
             <h2 data-testid="header__title">Current page: About us</h2>
+          ) : pathPage === 'form' ? (
+            <h2>Current page: Form</h2>
           ) : (
             <h2 data-testid="header__title">Current page: Not Found</h2>
           )}
@@ -23,6 +25,9 @@ class Header extends Component {
               </li>
               <li className="navigation__item">
                 <NavLink to="/about">About us</NavLink>
+              </li>
+              <li className="navigation__item">
+                <NavLink to="/form">Form</NavLink>
               </li>
             </ul>
           </nav>

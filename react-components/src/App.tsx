@@ -5,6 +5,7 @@ import Footer from './components/footer/footer';
 import Home from './pages/main/main';
 import About from './pages/about/about';
 import NotFound from './pages/404';
+import Form from './pages/form/form';
 
 export class App extends Component {
   render() {
@@ -14,6 +15,7 @@ export class App extends Component {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/form*" element={<Form />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
