@@ -1,20 +1,70 @@
 import CardsListFrom from '../cardListForm/cardListForm';
 import React, { Component, Fragment } from 'react';
+import CardMaleEnum from '../../types/enums/cardMaleEnum';
 import './index.css';
 
 class MyForm extends Component {
+  state = {
+    cardsArray: [],
+    inputName: '',
+    inputBirthday: '',
+    selectCountry: '',
+    checkboxConsent: '',
+    radioMale: '',
+    fileImage: '',
+  };
+
+  inputNameRef = React.createRef<HTMLInputElement>();
+  inputBirthdayRef = React.createRef<HTMLInputElement>();
+  selectCountryRef = React.createRef<HTMLSelectElement>();
+  checkboxConsentRef = React.createRef<HTMLInputElement>();
+  radioMaleFirstRef = React.createRef<HTMLInputElement>();
+  radioMaleSecondRef = React.createRef<HTMLInputElement>();
+
+  handleInputChange = () => {
+    this.setState({
+      inputName: this.inputNameRef.current?.value,
+      inputBirthday: this.inputBirthdayRef.current?.value,
+      selectCountry: this.selectCountryRef.current?.value,
+    });
+  };
+
+  handleInputClick = () => {
+    this.setState({
+      checkboxConsent: this.checkboxConsentRef.current?.checked,
+    });
+  };
+  /*
+  handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    this.setState({
+      selectCountry: this.selectCountryRef.current?.value,
+    });
+  };
+*/
+  handleRadioChange = () => {
+    this.setState({
+      radioMale: this.radioMaleFirstRef.current?.checked
+        ? this.radioMaleFirstRef.current?.value
+        : this.radioMaleSecondRef.current?.value,
+    });
+  };
+
   render() {
-    const cardsArray = [
-      {
-        id: 0,
-        name: 'Tanya',
-        birthday: '1989-05-26',
-        country: 'Belarus',
-        isConsent: 'agree',
-        male: 'female',
-        thumbnail: 'https://i.dummyjson.com/data/products/66/thumbnail.jpg',
-      },
-    ];
+    console.log('this.inputName', this.state.inputName);
+    console.log('this.inputBirthday', this.state.inputBirthday);
+    console.log('this.selectCountry', this.state.selectCountry);
+    console.log('this.checkboxConsent', this.state.checkboxConsent);
+    console.log('this.radioMale', this.state.radioMale);
+
+    const {
+      cardsArray,
+      inputName,
+      inputBirthday,
+      selectCountry,
+      checkboxConsent,
+      radioMale,
+      fileImage,
+    } = this.state;
 
     return (
       <Fragment>
@@ -24,20 +74,33 @@ class MyForm extends Component {
               <div className="form-item">
                 <label htmlFor="name">Name:</label>
                 <input
+                  ref={this.inputNameRef}
                   id="name"
                   type="text"
                   className="name__input"
                   name="name"
                   placeholder="enter name"
+                  onChange={this.handleInputChange}
                 />
               </div>
               <div className="form-item">
                 <label htmlFor="birthday">Birthday:</label>
-                <input id="birthday" type="date" className="birthday__input" name="Birthday" />
+                <input
+                  ref={this.inputBirthdayRef}
+                  id="birthday"
+                  type="date"
+                  className="birthday__input"
+                  name="Birthday"
+                  onChange={this.handleInputChange}
+                />
               </div>
               <div className="form-item">
                 <label htmlFor="country">Country:</label>
-                <select className="country__select">
+                <select
+                  ref={this.selectCountryRef}
+                  onChange={this.handleInputChange}
+                  className="country__select"
+                >
                   <option value="USA">USA</option>
                   <option value="Italy">Italy</option>
                 </select>
@@ -46,8 +109,14 @@ class MyForm extends Component {
             <div className="form-group form-group__second">
               <div className="form-item">
                 <label htmlFor="consent" className="consent__label">
-                  <input id="consent" className="consent__checkbox" type="checkbox" required />I
-                  consent to my personal data
+                  <input
+                    ref={this.checkboxConsentRef}
+                    id="consent"
+                    className="consent__checkbox"
+                    type="checkbox"
+                    onClick={this.handleInputClick}
+                  />
+                  I consent to my personal data
                 </label>
               </div>
               <div className="form-item">
@@ -55,14 +124,26 @@ class MyForm extends Component {
                   Male/Female:
                 </label>
                 <fieldset id="switcher-group" className="switcher">
-                  <label className="switcher-group-item">
-                    <input type="radio" name="switcher-group" value="male" />
-                    male
-                  </label>
-                  <label className="switcher-group-item">
-                    <input type="radio" name="switcher-group" value="female" checked />
-                    female
-                  </label>
+                  {/* <label className="switcher-group-item"> */}
+                  <input
+                    ref={this.radioMaleFirstRef}
+                    type="radio"
+                    name="switcher"
+                    value={CardMaleEnum.MALE}
+                    onChange={this.handleRadioChange}
+                  />
+                  {CardMaleEnum.MALE}
+                  {/* </label> */}
+                  {/* <label className="switcher-group-item"> */}
+                  <input
+                    ref={this.radioMaleSecondRef}
+                    type="radio"
+                    name="switcher"
+                    value={CardMaleEnum.FEMALE}
+                    onChange={this.handleRadioChange}
+                  />
+                  {CardMaleEnum.FEMALE}
+                  {/* </label> */}
                 </fieldset>
               </div>
               <div className="form-item">

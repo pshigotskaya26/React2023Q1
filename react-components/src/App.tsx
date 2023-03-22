@@ -15,7 +15,7 @@ export class App extends Component {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/form*" element={<Form />} />
+            <Route path="/form" element={<Form />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

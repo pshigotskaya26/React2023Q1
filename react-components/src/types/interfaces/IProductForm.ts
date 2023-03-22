@@ -3,7 +3,7 @@ export interface IProductForm {
   name: string;
   birthday: string;
   country: string;
-  isConsent: string;
+  isConsent: boolean;
   male: string;
   thumbnail: string;
 }
