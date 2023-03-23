@@ -1,17 +1,15 @@
 import CardsListFrom from '../cardListForm/cardListForm';
 import React, { Component, Fragment } from 'react';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
+import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
+import { IProductForm } from '../../types/interfaces/IProductForm';
 import './index.css';
 
 class MyForm extends Component {
+  baseCardsArray: IProductForm[] = [];
+
   state = {
-    cardsArray: [],
-    inputName: '',
-    inputBirthday: '',
-    selectCountry: '',
-    checkboxConsent: '',
-    radioMale: '',
-    fileImage: '',
+    cardsAr: this.baseCardsArray,
   };
 
   inputNameRef = React.createRef<HTMLInputElement>();
@@ -22,33 +20,24 @@ class MyForm extends Component {
   radioMaleSecondRef = React.createRef<HTMLInputElement>();
   inputImageRef = React.createRef<HTMLInputElement>();
 
-  handleInputChange = () => {
-    this.setState({
+  handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const dataFromForm = {
+      cardsArray: this.state.cardsAr,
       inputName: this.inputNameRef.current?.value,
       inputBirthday: this.inputBirthdayRef.current?.value,
       selectCountry: this.selectCountryRef.current?.value,
+      checkboxConsent: this.checkboxConsentRef.current?.checked
+        ? cardIsConsentEnum.AGREE
+        : cardIsConsentEnum.DISAGREE,
       radioMale: this.radioMaleFirstRef.current?.checked
         ? this.radioMaleFirstRef.current?.value
         : this.radioMaleSecondRef.current?.value,
-      fileImage: this.inputImageRef.current?.files
-        ? this.inputImageRef.current?.files['0'].name
+      fileImage: this.inputImageRef?.current?.files
+        ? URL.createObjectURL(this.inputImageRef.current?.files[0])
         : '',
-    });
-  };
-
-  handleInputClick = () => {
-    this.setState({
-      checkboxConsent: this.checkboxConsentRef.current?.checked,
-    });
-  };
-
-  render() {
-    console.log('this.inputName', this.state.inputName);
-    console.log('this.inputBirthday', this.state.inputBirthday);
-    console.log('this.selectCountry', this.state.selectCountry);
-    console.log('this.checkboxConsent', this.state.checkboxConsent);
-    console.log('this.radioMale', this.state.radioMale);
-    console.log('fileImage: -------- ', this.state.fileImage);
+    };
 
     const {
       cardsArray,
@@ -58,11 +47,31 @@ class MyForm extends Component {
       checkboxConsent,
       radioMale,
       fileImage,
-    } = this.state;
+    } = dataFromForm;
 
+    const card: IProductForm = {
+      id: cardsArray.length + 1,
+      name: inputName,
+      birthday: inputBirthday,
+      country: selectCountry,
+      isConsent: checkboxConsent,
+      male: radioMale,
+      thumbnail: fileImage,
+    };
+
+    cardsArray.push(card);
+
+    this.setState({
+      cardsAr: cardsArray,
+    });
+
+    console.log('this.state.cardsAr: ', this.state.cardsAr);
+  };
+
+  render() {
     return (
       <Fragment>
-        <form className="my-form">
+        <form className="my-form" onSubmit={this.handleSubmit}>
           <div className="my-form__content">
             <div className="form-group form-group__first">
               <div className="form-item">
@@ -74,7 +83,6 @@ class MyForm extends Component {
                   className="name__input"
                   name="name"
                   placeholder="enter name"
-                  onChange={this.handleInputChange}
                 />
               </div>
               <div className="form-item">
@@ -85,16 +93,11 @@ class MyForm extends Component {
                   type="date"
                   className="birthday__input"
                   name="Birthday"
-                  onChange={this.handleInputChange}
                 />
               </div>
               <div className="form-item">
                 <label htmlFor="country">Country:</label>
-                <select
-                  ref={this.selectCountryRef}
-                  onChange={this.handleInputChange}
-                  className="country__select"
-                >
+                <select ref={this.selectCountryRef} className="country__select">
                   <option value="USA">USA</option>
                   <option value="Italy">Italy</option>
                 </select>
@@ -108,7 +111,6 @@ class MyForm extends Component {
                     id="consent"
                     className="consent__checkbox"
                     type="checkbox"
-                    onClick={this.handleInputClick}
                   />
                   I consent to my personal data
                 </label>
@@ -118,38 +120,31 @@ class MyForm extends Component {
                   Male/Female:
                 </label>
                 <fieldset id="switcher-group" className="switcher">
-                  {/* <label className="switcher-group-item"> */}
-                  <input
-                    ref={this.radioMaleFirstRef}
-                    type="radio"
-                    name="switcher"
-                    value={CardMaleEnum.MALE}
-                    onChange={this.handleInputChange}
-                  />
-                  {CardMaleEnum.MALE}
-                  {/* </label> */}
-                  {/* <label className="switcher-group-item"> */}
-                  <input
-                    ref={this.radioMaleSecondRef}
-                    type="radio"
-                    name="switcher"
-                    value={CardMaleEnum.FEMALE}
-                    onChange={this.handleInputChange}
-                  />
-                  {CardMaleEnum.FEMALE}
-                  {/* </label> */}
+                  <label className="switcher-group-item">
+                    <input
+                      ref={this.radioMaleFirstRef}
+                      type="radio"
+                      name="switcher"
+                      value={CardMaleEnum.MALE}
+                    />
+                    {CardMaleEnum.MALE}
+                  </label>
+                  <label className="switcher-group-item">
+                    <input
+                      ref={this.radioMaleSecondRef}
+                      type="radio"
+                      name="switcher"
+                      value={CardMaleEnum.FEMALE}
+                    />
+                    {CardMaleEnum.FEMALE}
+                  </label>
                 </fieldset>
               </div>
               <div className="form-item">
                 <label htmlFor="image" className="image__label">
                   Choose image:
                 </label>
-                <input
-                  ref={this.inputImageRef}
-                  type="file"
-                  className="image__input"
-                  onChange={this.handleInputChange}
-                />
+                <input ref={this.inputImageRef} type="file" className="image__input" />
               </div>
             </div>
           </div>
@@ -157,7 +152,7 @@ class MyForm extends Component {
             <button className="btn btn-submit">Submit</button>
           </div>
         </form>
-        <CardsListFrom cards={cardsArray} />
+        <CardsListFrom cards={this.state.cardsAr} />
       </Fragment>
     );
   }
