@@ -5,5 +5,5 @@ export interface IProductForm {
   country: string;
   isConsent: boolean;
   male: string;
-  thumbnail: string;
+  thumbnail: string | null;
 }

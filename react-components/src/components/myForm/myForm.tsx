@@ -20,32 +20,25 @@ class MyForm extends Component {
   checkboxConsentRef = React.createRef<HTMLInputElement>();
   radioMaleFirstRef = React.createRef<HTMLInputElement>();
   radioMaleSecondRef = React.createRef<HTMLInputElement>();
+  inputImageRef = React.createRef<HTMLInputElement>();
 
   handleInputChange = () => {
     this.setState({
       inputName: this.inputNameRef.current?.value,
       inputBirthday: this.inputBirthdayRef.current?.value,
       selectCountry: this.selectCountryRef.current?.value,
+      radioMale: this.radioMaleFirstRef.current?.checked
+        ? this.radioMaleFirstRef.current?.value
+        : this.radioMaleSecondRef.current?.value,
+      fileImage: this.inputImageRef.current?.files
+        ? this.inputImageRef.current?.files['0'].name
+        : '',
     });
   };
 
   handleInputClick = () => {
     this.setState({
       checkboxConsent: this.checkboxConsentRef.current?.checked,
-    });
-  };
-  /*
-  handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    this.setState({
-      selectCountry: this.selectCountryRef.current?.value,
-    });
-  };
-*/
-  handleRadioChange = () => {
-    this.setState({
-      radioMale: this.radioMaleFirstRef.current?.checked
-        ? this.radioMaleFirstRef.current?.value
-        : this.radioMaleSecondRef.current?.value,
     });
   };
 
@@ -55,6 +48,7 @@ class MyForm extends Component {
     console.log('this.selectCountry', this.state.selectCountry);
     console.log('this.checkboxConsent', this.state.checkboxConsent);
     console.log('this.radioMale', this.state.radioMale);
+    console.log('fileImage: -------- ', this.state.fileImage);
 
     const {
       cardsArray,
@@ -130,7 +124,7 @@ class MyForm extends Component {
                     type="radio"
                     name="switcher"
                     value={CardMaleEnum.MALE}
-                    onChange={this.handleRadioChange}
+                    onChange={this.handleInputChange}
                   />
                   {CardMaleEnum.MALE}
                   {/* </label> */}
@@ -140,7 +134,7 @@ class MyForm extends Component {
                     type="radio"
                     name="switcher"
                     value={CardMaleEnum.FEMALE}
-                    onChange={this.handleRadioChange}
+                    onChange={this.handleInputChange}
                   />
                   {CardMaleEnum.FEMALE}
                   {/* </label> */}
@@ -150,7 +144,12 @@ class MyForm extends Component {
                 <label htmlFor="image" className="image__label">
                   Choose image:
                 </label>
-                <input type="file" className="image__input" />
+                <input
+                  ref={this.inputImageRef}
+                  type="file"
+                  className="image__input"
+                  onChange={this.handleInputChange}
+                />
               </div>
             </div>
           </div>
