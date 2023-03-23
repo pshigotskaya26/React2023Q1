@@ -3,6 +3,7 @@ import ErrorMessage from '../ErrorMessage/errorMessage';
 import React, { Component, Fragment } from 'react';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
 import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
+import CardCountryEnum from '../../types/enums/cardCountryEnum';
 import { IProductForm } from '../../types/interfaces/IProductForm';
 import './index.css';
 
@@ -117,8 +118,11 @@ class MyForm extends Component {
               <div className="form-item">
                 <label htmlFor="country">Country:</label>
                 <select ref={this.selectCountryRef} className="country__select">
-                  <option value="USA">USA</option>
-                  <option value="Italy">Italy</option>
+                  <option value={CardCountryEnum.USA}>{CardCountryEnum.USA}</option>
+                  <option value={CardCountryEnum.BELARUS}>{CardCountryEnum.BELARUS}</option>
+                  <option value={CardCountryEnum.ITALY}>{CardCountryEnum.ITALY}</option>
+                  <option value={CardCountryEnum.RUSSIA}>{CardCountryEnum.RUSSIA}</option>
+                  <option value={CardCountryEnum.POLAND}>{CardCountryEnum.POLAND}</option>
                 </select>
                 {country && <ErrorMessage errorMessage={country} />}
               </div>
