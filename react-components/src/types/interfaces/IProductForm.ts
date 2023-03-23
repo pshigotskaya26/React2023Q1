@@ -3,7 +3,7 @@ export interface IProductForm {
   name?: string;
   birthday?: string;
   country?: string;
-  isConsent?: boolean | string;
+  isConsent?: string;
   male?: string;
   thumbnail?: Blob | MediaSource | string;
 }

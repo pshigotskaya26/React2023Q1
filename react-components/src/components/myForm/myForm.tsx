@@ -1,4 +1,5 @@
 import CardsListFrom from '../cardListForm/cardListForm';
+import ErrorMessage from '../ErrorMessage/errorMessage';
 import React, { Component, Fragment } from 'react';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
 import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
@@ -10,6 +11,21 @@ class MyForm extends Component {
 
   state = {
     cardsAr: this.baseCardsArray,
+    formErrors: {
+      name: '1',
+      birthday: '1',
+      country: '1',
+      isConsent: '1',
+      male: '1',
+      thumbnail: '1',
+    },
+    nameValid: false,
+    birthdayValid: false,
+    countryValid: false,
+    isConsentValid: false,
+    maleValid: false,
+    thumbnailValid: false,
+    formValid: false,
   };
 
   inputNameRef = React.createRef<HTMLInputElement>();
@@ -64,11 +80,12 @@ class MyForm extends Component {
     this.setState({
       cardsAr: cardsArray,
     });
-
-    console.log('this.state.cardsAr: ', this.state.cardsAr);
   };
 
+  validateFields = (objectCard: IProductForm) => {};
+
   render() {
+    const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
       <Fragment>
         <form className="my-form" onSubmit={this.handleSubmit}>
@@ -84,6 +101,7 @@ class MyForm extends Component {
                   name="name"
                   placeholder="enter name"
                 />
+                {name && <ErrorMessage errorMessage={name} />}
               </div>
               <div className="form-item">
                 <label htmlFor="birthday">Birthday:</label>
@@ -94,6 +112,7 @@ class MyForm extends Component {
                   className="birthday__input"
                   name="Birthday"
                 />
+                {birthday && <ErrorMessage errorMessage={birthday} />}
               </div>
               <div className="form-item">
                 <label htmlFor="country">Country:</label>
@@ -101,6 +120,7 @@ class MyForm extends Component {
                   <option value="USA">USA</option>
                   <option value="Italy">Italy</option>
                 </select>
+                {country && <ErrorMessage errorMessage={country} />}
               </div>
             </div>
             <div className="form-group form-group__second">
@@ -114,6 +134,7 @@ class MyForm extends Component {
                   />
                   I consent to my personal data
                 </label>
+                {isConsent && <ErrorMessage errorMessage={isConsent} />}
               </div>
               <div className="form-item">
                 <label htmlFor="switcher" className="switcher__label">
@@ -139,12 +160,14 @@ class MyForm extends Component {
                     {CardMaleEnum.FEMALE}
                   </label>
                 </fieldset>
+                {male && <ErrorMessage errorMessage={male} />}
               </div>
               <div className="form-item">
                 <label htmlFor="image" className="image__label">
                   Choose image:
                 </label>
                 <input ref={this.inputImageRef} type="file" className="image__input" />
+                {thumbnail && <ErrorMessage errorMessage={thumbnail} />}
               </div>
             </div>
           </div>

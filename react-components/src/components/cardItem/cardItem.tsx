@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
 import { IProduct } from '../../types/interfaces/IProduct';
-import PropTypes from 'prop-types';
 
 interface CardItemProps {
   product: IProduct;
