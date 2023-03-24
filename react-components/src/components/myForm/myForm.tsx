@@ -51,7 +51,9 @@ class MyForm extends Component {
         : cardIsConsentEnum.DISAGREE,
       radioMale: this.radioMaleFirstRef.current?.checked
         ? this.radioMaleFirstRef.current?.value
-        : this.radioMaleSecondRef.current?.value,
+        : this.radioMaleSecondRef.current?.checked
+        ? this.radioMaleSecondRef.current?.value
+        : '',
       fileImage: this.inputImageRef?.current?.files
         ? URL.createObjectURL(this.inputImageRef.current?.files[0])
         : '',
@@ -125,7 +127,7 @@ class MyForm extends Component {
       countryValid = true;
       formErrors.country = '';
     } else {
-      countryValid = true;
+      countryValid = false;
       formErrors.country = 'Country is not choosen';
     }
 
@@ -137,11 +139,25 @@ class MyForm extends Component {
       isConsentValid = false;
       formErrors.isConsent = 'Consent is not choosen';
     }
+
+    //validate radioMale field
+    if (
+      formData.radioMale &&
+      (formData.radioMale === CardMaleEnum.MALE || formData.radioMale === CardMaleEnum.FEMALE)
+    ) {
+      maleValid = true;
+      formErrors.male = '';
+    } else if (!formData.radioMale) {
+      maleValid = false;
+      formErrors.male = 'Male is not choosen';
+    }
+
     this.setState({
       nameValid: nameValid,
       birthdayValid: birthdayValid,
       countryValid: countryValid,
       isConsentValid: isConsentValid,
+      maleValid: maleValid,
       formErrors: formErrors,
     });
   };
