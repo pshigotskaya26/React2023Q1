@@ -129,10 +129,19 @@ class MyForm extends Component {
       formErrors.country = 'Country is not choosen';
     }
 
+    //validate agree/disagree checkbox
+    if (formData.checkboxConsent && formData.checkboxConsent === cardIsConsentEnum.AGREE) {
+      isConsentValid = true;
+      formErrors.isConsent = '';
+    } else {
+      isConsentValid = false;
+      formErrors.isConsent = 'Consent is not choosen';
+    }
     this.setState({
       nameValid: nameValid,
       birthdayValid: birthdayValid,
       countryValid: countryValid,
+      isConsentValid: isConsentValid,
       formErrors: formErrors,
     });
   };
