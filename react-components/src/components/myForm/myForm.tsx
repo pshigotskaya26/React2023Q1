@@ -5,6 +5,7 @@ import CardMaleEnum from '../../types/enums/cardMaleEnum';
 import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
 import CardCountryEnum from '../../types/enums/cardCountryEnum';
 import { IProductForm } from '../../types/interfaces/IProductForm';
+import { IDataForm } from '../../types/interfaces/IDataForm';
 import './index.css';
 
 class MyForm extends Component {
@@ -13,12 +14,12 @@ class MyForm extends Component {
   state = {
     cardsAr: this.baseCardsArray,
     formErrors: {
-      name: '1',
-      birthday: '1',
-      country: '1',
-      isConsent: '1',
-      male: '1',
-      thumbnail: '1',
+      name: '',
+      birthday: '',
+      country: '',
+      isConsent: '',
+      male: '',
+      thumbnail: '',
     },
     nameValid: false,
     birthdayValid: false,
@@ -40,7 +41,7 @@ class MyForm extends Component {
   handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const dataFromForm = {
+    const dataFromForm: IDataForm = {
       cardsArray: this.state.cardsAr,
       inputName: this.inputNameRef.current?.value,
       inputBirthday: this.inputBirthdayRef.current?.value,
@@ -56,6 +57,8 @@ class MyForm extends Component {
         : '',
     };
 
+    this.validateFields(dataFromForm);
+    /*
     const {
       cardsArray,
       inputName,
@@ -81,9 +84,34 @@ class MyForm extends Component {
     this.setState({
       cardsAr: cardsArray,
     });
+    */
   };
 
-  validateFields = (objectCard: IProductForm) => {};
+  validateFields = (formData: IDataForm) => {
+    let {
+      formErrors,
+      nameValid,
+      birthdayValid,
+      countryValid,
+      isConsentValid,
+      maleValid,
+      thumbnailValid,
+    } = this.state;
+
+    if (formData.inputName && /^[A-ZА-Я]{1}[а-яА-Яa-zA-Z]{2,}$/.test(formData.inputName) === true) {
+      nameValid = true;
+      formErrors.name = '';
+    } else {
+      nameValid = false;
+      formErrors.name =
+        "Name is invalid: first letter must be in Upper case and name's length must be >=3 ";
+    }
+
+    this.setState({
+      nameValid: nameValid,
+      formErrors: formErrors,
+    });
+  };
 
   render() {
     const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
