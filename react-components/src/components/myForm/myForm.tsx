@@ -120,9 +120,19 @@ class MyForm extends Component {
       formErrors.birthday = 'Birthday is not choosen';
     }
 
+    //validate country field
+    if (formData.selectCountry) {
+      countryValid = true;
+      formErrors.country = '';
+    } else {
+      countryValid = true;
+      formErrors.country = 'Country is not choosen';
+    }
+
     this.setState({
       nameValid: nameValid,
       birthdayValid: birthdayValid,
+      countryValid: countryValid,
       formErrors: formErrors,
     });
   };
@@ -161,6 +171,9 @@ class MyForm extends Component {
               <div className="form-item">
                 <label htmlFor="country">Country:</label>
                 <select ref={this.selectCountryRef} className="country__select">
+                  <option value="" hidden>
+                    No selected
+                  </option>
                   <option value={CardCountryEnum.USA}>{CardCountryEnum.USA}</option>
                   <option value={CardCountryEnum.BELARUS}>{CardCountryEnum.BELARUS}</option>
                   <option value={CardCountryEnum.ITALY}>{CardCountryEnum.ITALY}</option>
