@@ -98,22 +98,37 @@ class MyForm extends Component {
       thumbnailValid,
     } = this.state;
 
+    //validate inputName field
     if (formData.inputName && /^[A-ZА-Я]{1}[а-яА-Яa-zA-Z]{2,}$/.test(formData.inputName) === true) {
       nameValid = true;
       formErrors.name = '';
     } else {
       nameValid = false;
       formErrors.name =
-        "Name is invalid: first letter must be in Upper case and name's length must be >=3 ";
+        "Name is invalid: first letter must be in Upper case and name's length must be >=3";
+    }
+
+    //validate birthday field
+    if (formData.inputBirthday && Date.parse(formData.inputBirthday) <= Date.now()) {
+      birthdayValid = true;
+      formErrors.birthday = '';
+    } else if (formData.inputBirthday && Date.parse(formData.inputBirthday) > Date.now()) {
+      birthdayValid = false;
+      formErrors.birthday = "Birthday must be less now' date";
+    } else {
+      birthdayValid = false;
+      formErrors.birthday = 'Birthday is not choosen';
     }
 
     this.setState({
       nameValid: nameValid,
+      birthdayValid: birthdayValid,
       formErrors: formErrors,
     });
   };
 
   render() {
+    console.log('this.state: ', this.state);
     const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
       <Fragment>
