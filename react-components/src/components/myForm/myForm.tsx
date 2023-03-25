@@ -72,6 +72,7 @@ class MyForm extends Component {
     await this.validateFields(dataFromForm);
     await this.validateForm();
     await this.createCard(dataFromForm);
+    //await this.showMessage();
   };
 
   validateFields = (formData: IDataForm) => {
@@ -214,6 +215,13 @@ class MyForm extends Component {
     }
   };
 
+  showMessage = () => {
+    let { formValid } = this.state;
+    if (formValid) {
+      alert('The card is created and added in the list.');
+    }
+  };
+
   render() {
     const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
@@ -316,7 +324,7 @@ class MyForm extends Component {
             <button className="btn btn-submit">Submit</button>
           </div>
         </form>
-        <CardsListFrom cards={this.state.cardsAr} />
+        <CardsListFrom formValidValue={this.state.formValid} cards={this.state.cardsAr} />
       </Fragment>
     );
   }
