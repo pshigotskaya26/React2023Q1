@@ -30,6 +30,7 @@ class MyForm extends Component {
     formValid: false,
   };
 
+  formRef = React.createRef<HTMLFormElement>();
   inputNameRef = React.createRef<HTMLInputElement>();
   inputBirthdayRef = React.createRef<HTMLInputElement>();
   selectCountryRef = React.createRef<HTMLSelectElement>();
@@ -72,6 +73,7 @@ class MyForm extends Component {
     await this.validateFields(dataFromForm);
     await this.validateForm();
     await this.createCard(dataFromForm);
+    await this.ressetForm();
     //await this.showMessage();
   };
 
@@ -215,10 +217,11 @@ class MyForm extends Component {
     }
   };
 
-  showMessage = () => {
+  ressetForm = () => {
     let { formValid } = this.state;
+
     if (formValid) {
-      alert('The card is created and added in the list.');
+      this.formRef.current?.reset();
     }
   };
 
@@ -226,7 +229,7 @@ class MyForm extends Component {
     const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
       <Fragment>
-        <form className="my-form" onSubmit={this.handleSubmit}>
+        <form className="my-form" onSubmit={this.handleSubmit} ref={this.formRef}>
           <div className="my-form__content">
             <div className="form-group form-group__first">
               <div className="form-item">
