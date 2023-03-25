@@ -5,5 +5,5 @@ export interface IProductForm {
   country?: string;
   isConsent?: string;
   male?: string;
-  thumbnail?: Blob | MediaSource | string;
+  thumbnail?: Blob | MediaSource | string | undefined;
 }

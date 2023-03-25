@@ -41,6 +41,17 @@ class MyForm extends Component {
   handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    let fileIMG: string = '';
+    if (this.inputImageRef.current && this.inputImageRef.current.files?.length === 0) {
+      fileIMG = '';
+      //       console.log('-----: ', typeof fileIMG);
+    } else if (
+      this.inputImageRef.current &&
+      this.inputImageRef.current.files &&
+      this.inputImageRef.current.files?.length !== 0
+    ) {
+      fileIMG = URL.createObjectURL(this.inputImageRef.current.files[0]);
+    }
     const dataFromForm: IDataForm = {
       cardsArray: this.state.cardsAr,
       inputName: this.inputNameRef.current?.value,
@@ -54,12 +65,14 @@ class MyForm extends Component {
         : this.radioMaleSecondRef.current?.checked
         ? this.radioMaleSecondRef.current?.value
         : '',
-      fileImage: this.inputImageRef?.current?.files
-        ? URL.createObjectURL(this.inputImageRef.current?.files[0])
-        : '',
+      fileImage: fileIMG,
+      //       fileImage: this.inputImageRef?.current?.files
+      //         ? URL.createObjectURL(this.inputImageRef.current.files[0])
+      //         : '',
     };
 
     this.validateFields(dataFromForm);
+
     /*
     const {
       cardsArray,
@@ -152,18 +165,33 @@ class MyForm extends Component {
       formErrors.male = 'Male is not choosen';
     }
 
+    //validate thumbnail image
+    if (formData.fileImage) {
+      thumbnailValid = true;
+      formErrors.thumbnail = '';
+    } else {
+      thumbnailValid = false;
+      formErrors.thumbnail = 'Image is not choosen';
+    }
+
     this.setState({
       nameValid: nameValid,
       birthdayValid: birthdayValid,
       countryValid: countryValid,
       isConsentValid: isConsentValid,
       maleValid: maleValid,
+      thumbnailValid: thumbnailValid,
       formErrors: formErrors,
     });
+
+    if (this.state.formValid === false) {
+      return false;
+    }
   };
 
   render() {
-    console.log('this.state: ', this.state);
+    console.log('this.state : ', this.state);
+    console.log('this.inputImageRef: ', this.inputImageRef);
     const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
       <Fragment>
@@ -251,7 +279,12 @@ class MyForm extends Component {
                 <label htmlFor="image" className="image__label">
                   Choose image:
                 </label>
-                <input ref={this.inputImageRef} type="file" className="image__input" />
+                <input
+                  ref={this.inputImageRef}
+                  type="file"
+                  accept="image/*"
+                  className="image__input"
+                />
                 {thumbnail && <ErrorMessage errorMessage={thumbnail} />}
               </div>
             </div>

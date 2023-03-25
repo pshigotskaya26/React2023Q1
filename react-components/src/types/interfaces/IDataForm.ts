@@ -7,5 +7,5 @@ export interface IDataForm {
   selectCountry: string | undefined;
   checkboxConsent: string | undefined;
   radioMale: string | undefined;
-  fileImage: string | undefined;
+  fileImage?: string | null;
 }
