@@ -38,13 +38,13 @@ class MyForm extends Component {
   radioMaleSecondRef = React.createRef<HTMLInputElement>();
   inputImageRef = React.createRef<HTMLInputElement>();
 
-  handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
+  handleSubmit = async (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let fileIMG: string = '';
+
     if (this.inputImageRef.current && this.inputImageRef.current.files?.length === 0) {
       fileIMG = '';
-      //       console.log('-----: ', typeof fileIMG);
     } else if (
       this.inputImageRef.current &&
       this.inputImageRef.current.files &&
@@ -52,6 +52,7 @@ class MyForm extends Component {
     ) {
       fileIMG = URL.createObjectURL(this.inputImageRef.current.files[0]);
     }
+
     const dataFromForm: IDataForm = {
       cardsArray: this.state.cardsAr,
       inputName: this.inputNameRef.current?.value,
@@ -66,40 +67,11 @@ class MyForm extends Component {
         ? this.radioMaleSecondRef.current?.value
         : '',
       fileImage: fileIMG,
-      //       fileImage: this.inputImageRef?.current?.files
-      //         ? URL.createObjectURL(this.inputImageRef.current.files[0])
-      //         : '',
     };
 
-    this.validateFields(dataFromForm);
-
-    /*
-    const {
-      cardsArray,
-      inputName,
-      inputBirthday,
-      selectCountry,
-      checkboxConsent,
-      radioMale,
-      fileImage,
-    } = dataFromForm;
-
-    const card: IProductForm = {
-      id: cardsArray.length + 1,
-      name: inputName,
-      birthday: inputBirthday,
-      country: selectCountry,
-      isConsent: checkboxConsent,
-      male: radioMale,
-      thumbnail: fileImage,
-    };
-
-    cardsArray.push(card);
-
-    this.setState({
-      cardsAr: cardsArray,
-    });
-    */
+    await this.validateFields(dataFromForm);
+    await this.validateForm();
+    await this.createCard(dataFromForm);
   };
 
   validateFields = (formData: IDataForm) => {
@@ -183,15 +155,66 @@ class MyForm extends Component {
       thumbnailValid: thumbnailValid,
       formErrors: formErrors,
     });
+  };
 
-    if (this.state.formValid === false) {
-      return false;
+  validateForm = () => {
+    let {
+      nameValid,
+      birthdayValid,
+      countryValid,
+      isConsentValid,
+      maleValid,
+      thumbnailValid,
+      formValid,
+    } = this.state;
+
+    formValid =
+      nameValid && birthdayValid && countryValid && isConsentValid && maleValid && thumbnailValid;
+
+    if (formValid) {
+      this.setState({
+        formValid: formValid,
+      });
+    } else {
+      this.setState({
+        formValid: false,
+      });
+    }
+  };
+
+  createCard = (formData: IDataForm) => {
+    let { formValid } = this.state;
+
+    if (formValid) {
+      const {
+        cardsArray,
+        inputName,
+        inputBirthday,
+        selectCountry,
+        checkboxConsent,
+        radioMale,
+        fileImage,
+      } = formData;
+
+      const card: IProductForm = {
+        id: cardsArray.length + 1,
+        name: inputName,
+        birthday: inputBirthday,
+        country: selectCountry,
+        isConsent: checkboxConsent,
+        male: radioMale,
+        thumbnail: fileImage,
+      };
+
+      cardsArray.push(card);
+
+      this.setState({
+        cardsAr: cardsArray,
+      });
     }
   };
 
   render() {
-    console.log('this.state : ', this.state);
-    console.log('this.inputImageRef: ', this.inputImageRef);
     const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
       <Fragment>
