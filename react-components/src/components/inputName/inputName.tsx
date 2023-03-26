@@ -3,7 +3,7 @@ import './index.css';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 
 interface InputNameProps {
-  forwardRef: RefObject;
+  forwardRef: React.RefObject<HTMLInputElement>;
   name: string;
 }
 
