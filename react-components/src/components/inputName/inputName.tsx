@@ -22,6 +22,7 @@ class InputName extends Component<InputNameProps> {
           className="name__input"
           name="name"
           placeholder="enter name"
+          data-testid="name__input"
         />
         {this.props.name && <ErrorMessage errorMessage={this.props.name} />}
       </Fragment>

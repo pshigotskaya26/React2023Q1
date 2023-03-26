@@ -10,7 +10,11 @@ class ErrorMessage extends Component<ErrorMessageProps> {
     super(props);
   }
   render() {
-    return <span className="error-message">{this.props.errorMessage}</span>;
+    return (
+      <span data-testid="error-message" className="error-message">
+        {this.props.errorMessage}
+      </span>
+    );
   }
 }
 
