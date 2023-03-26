@@ -67,8 +67,6 @@ class MyForm extends Component {
   };
 
   render() {
-    console.log('state in myForm: ', this.state);
-    // const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
       <Fragment>
         <Form

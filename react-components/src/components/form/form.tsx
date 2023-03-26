@@ -246,7 +246,6 @@ class Form extends Component<FormProps> {
   };
 
   render() {
-    console.log('state in form: ', this.state);
     const { name, birthday, country, isConsent, male, thumbnail } = this.state.formErrors;
     return (
       <form className="my-form" onSubmit={this.handleSubmit} ref={this.props.forwardRefFrom}>
