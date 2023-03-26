@@ -1,12 +1,16 @@
-import CardsListFrom from '../cardListForm/cardListForm';
-import ErrorMessage from '../ErrorMessage/errorMessage';
 import React, { Component, Fragment } from 'react';
+import './index.css';
+import CardsListFrom from '../cardListForm/cardListForm';
+import InputName from '../inputName/inputName';
+import InputBirthday from '../inputBirthday/inputBirthday';
+import SelectCountry from '../selectCountry/selectCountry';
+import CheckboxConsent from '../checkboxConsent/checkboxConsent';
+import InputRadioMale from '../inputRadioMale/inputRadioMale';
+import InputFileImage from '../inputFileImage/inputFileImage';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
 import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
-import CardCountryEnum from '../../types/enums/cardCountryEnum';
 import { IProductForm } from '../../types/interfaces/IProductForm';
 import { IDataForm } from '../../types/interfaces/IDataForm';
-import './index.css';
 
 class MyForm extends Component {
   baseCardsArray: IProductForm[] = [];
@@ -233,93 +237,28 @@ class MyForm extends Component {
           <div className="my-form__content">
             <div className="form-group form-group__first">
               <div className="form-item">
-                <label htmlFor="name">Name:</label>
-                <input
-                  ref={this.inputNameRef}
-                  id="name"
-                  type="text"
-                  className="name__input"
-                  name="name"
-                  placeholder="enter name"
-                />
-                {name && <ErrorMessage errorMessage={name} />}
+                <InputName forwardRef={this.inputNameRef} name={name} />
               </div>
               <div className="form-item">
-                <label htmlFor="birthday">Birthday:</label>
-                <input
-                  ref={this.inputBirthdayRef}
-                  id="birthday"
-                  type="date"
-                  className="birthday__input"
-                  name="Birthday"
-                />
-                {birthday && <ErrorMessage errorMessage={birthday} />}
+                <InputBirthday forwardRef={this.inputBirthdayRef} name={birthday} />
               </div>
               <div className="form-item">
-                <label htmlFor="country">Country:</label>
-                <select ref={this.selectCountryRef} className="country__select">
-                  <option value="" hidden>
-                    No selected
-                  </option>
-                  <option value={CardCountryEnum.USA}>{CardCountryEnum.USA}</option>
-                  <option value={CardCountryEnum.BELARUS}>{CardCountryEnum.BELARUS}</option>
-                  <option value={CardCountryEnum.ITALY}>{CardCountryEnum.ITALY}</option>
-                  <option value={CardCountryEnum.RUSSIA}>{CardCountryEnum.RUSSIA}</option>
-                  <option value={CardCountryEnum.POLAND}>{CardCountryEnum.POLAND}</option>
-                </select>
-                {country && <ErrorMessage errorMessage={country} />}
+                <SelectCountry forwardRef={this.selectCountryRef} name={country} />
               </div>
             </div>
             <div className="form-group form-group__second">
               <div className="form-item">
-                <label htmlFor="consent" className="consent__label">
-                  <input
-                    ref={this.checkboxConsentRef}
-                    id="consent"
-                    className="consent__checkbox"
-                    type="checkbox"
-                  />
-                  I consent to my personal data
-                </label>
-                {isConsent && <ErrorMessage errorMessage={isConsent} />}
+                <CheckboxConsent forwardRef={this.checkboxConsentRef} name={isConsent} />
               </div>
               <div className="form-item">
-                <label htmlFor="switcher" className="switcher__label">
-                  Male/Female:
-                </label>
-                <fieldset id="switcher-group" className="switcher">
-                  <label className="switcher-group-item">
-                    <input
-                      ref={this.radioMaleFirstRef}
-                      type="radio"
-                      name="switcher"
-                      value={CardMaleEnum.MALE}
-                    />
-                    {CardMaleEnum.MALE}
-                  </label>
-                  <label className="switcher-group-item">
-                    <input
-                      ref={this.radioMaleSecondRef}
-                      type="radio"
-                      name="switcher"
-                      value={CardMaleEnum.FEMALE}
-                    />
-                    {CardMaleEnum.FEMALE}
-                  </label>
-                </fieldset>
-                {male && <ErrorMessage errorMessage={male} />}
-              </div>
-              <div className="form-item">
-                <label htmlFor="image" className="image__label">
-                  Choose image:
-                </label>
-                <input
-                  ref={this.inputImageRef}
-                  type="file"
-                  accept="image/*"
-                  className="image__input"
+                <InputRadioMale
+                  forwardRefFirst={this.radioMaleFirstRef}
+                  forwardRefSecond={this.radioMaleSecondRef}
+                  name={male}
                 />
-                {thumbnail && <ErrorMessage errorMessage={thumbnail} />}
+              </div>
+              <div className="form-item">
+                <InputFileImage forwardRef={this.inputImageRef} name={thumbnail} />
               </div>
             </div>
           </div>
