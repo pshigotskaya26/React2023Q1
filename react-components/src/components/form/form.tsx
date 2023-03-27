@@ -70,144 +70,63 @@ class Form extends Component<FormProps> {
     await this.validateForm();
     await this.createCard(dataFromForm);
     await this.ressetForm();
-    //await this.showMessage();
   };
 
   validateFields = (formData: IDataForm) => {
-    //     const {
-    //       formErrors,
-    //       nameValid,
-    //       birthdayValid,
-    //       countryValid,
-    //       isConsentValid,
-    //       maleValid,
-    //       thumbnailValid,
-    //     } = stateOfForm;
+    const formErrorsObj = {
+      name: '',
+      birthday: '',
+      country: '',
+      isConsent: '',
+      male: '',
+      thumbnail: '',
+    };
+
+    let nameValidValue: boolean = this.state.nameValid;
+    let birthdayValidValue: boolean = this.state.birthdayValid;
+    let countryValidValue: boolean = this.state.countryValid;
+    let isConsentValidValue: boolean = this.state.isConsentValid;
+    let thumbnailValidValue: boolean = this.state.thumbnailValid;
+    let maleValidValue: boolean = this.state.maleValid;
 
     //validate inputName field
     if (formData.inputName && /^[A-ZА-Я]{1}[а-яА-Яa-zA-Z]{2,}$/.test(formData.inputName) === true) {
-      //nameValid = true;
-
-      this.setState({
-        nameValid: true,
-        formErrors: {
-          name: '',
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
-      //formErrors.name = '';
+      nameValidValue = true;
+      formErrorsObj.name = '';
     } else {
-      this.setState({
-        nameValid: false,
-        formErrors: {
-          name: "Name is invalid: first letter must be in Upper case and name's length must be >=3",
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
-      // nameValid = false;
-      //       formErrors.name =
-      //         "Name is invalid: first letter must be in Upper case and name's length must be >=3";
+      nameValidValue = false;
+      formErrorsObj.name =
+        "Name is invalid: first letter must be in Upper case and name's length must be >=3";
     }
 
     //validate birthday field
     if (formData.inputBirthday && Date.parse(formData.inputBirthday) <= Date.now()) {
-      this.setState({
-        birthdayValid: true,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: '',
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      birthdayValidValue = true;
+      formErrorsObj.birthday = '';
     } else if (formData.inputBirthday && Date.parse(formData.inputBirthday) > Date.now()) {
-      this.setState({
-        birthdayValid: false,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: "Birthday must be less now' date",
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      birthdayValidValue = false;
+      formErrorsObj.birthday = "Birthday must be less now' date";
     } else {
-      this.setState({
-        birthdayValid: false,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: 'Birthday is not choosen',
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      birthdayValidValue = false;
+      formErrorsObj.birthday = 'Birthday is not choosen';
     }
 
     //validate country field
     if (formData.selectCountry) {
-      this.setState({
-        countryValid: true,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: '',
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      countryValidValue = true;
+      formErrorsObj.country = '';
     } else {
-      this.setState({
-        countryValid: false,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: 'Country is not choosen',
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      countryValidValue = false;
+      formErrorsObj.country = 'Country is not choosen';
     }
 
     //validate agree/disagree checkbox
     if (formData.checkboxConsent && formData.checkboxConsent === cardIsConsentEnum.AGREE) {
-      this.setState({
-        isConsentValid: true,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: '',
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      isConsentValidValue = true;
+      formErrorsObj.isConsent = '';
     } else {
-      this.setState({
-        isConsentValid: false,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: 'Consent is not choosen',
-          male: this.state.formErrors.male,
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      isConsentValidValue = false;
+      formErrorsObj.isConsent = 'Consent is not choosen';
     }
 
     //validate radioMale field
@@ -215,67 +134,31 @@ class Form extends Component<FormProps> {
       formData.radioMale &&
       (formData.radioMale === CardMaleEnum.MALE || formData.radioMale === CardMaleEnum.FEMALE)
     ) {
-      this.setState({
-        maleValid: true,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: '',
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      maleValidValue = true;
+      formErrorsObj.male = '';
     } else if (!formData.radioMale) {
-      this.setState({
-        maleValid: false,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: 'Male is not choosen',
-          thumbnail: this.state.formErrors.thumbnail,
-        },
-      });
+      maleValidValue = false;
+      formErrorsObj.male = 'Male is not choosen';
     }
 
     //validate thumbnail image
     if (formData.fileImage) {
-      this.setState({
-        thumbnailValid: true,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: '',
-        },
-      });
+      thumbnailValidValue = true;
+      formErrorsObj.thumbnail = '';
     } else {
-      this.setState({
-        thumbnailValid: false,
-        formErrors: {
-          name: this.state.formErrors.name,
-          birthday: this.state.formErrors.birthday,
-          country: this.state.formErrors.country,
-          isConsent: this.state.formErrors.isConsent,
-          male: this.state.formErrors.male,
-          thumbnail: 'Image is not choosen',
-        },
-      });
+      thumbnailValidValue = false;
+      formErrorsObj.thumbnail = 'Image is not choosen';
     }
 
-    //     this.setState({
-    //       nameValid: nameValid,
-    //       birthdayValid: birthdayValid,
-    //       countryValid: countryValid,
-    //       isConsentValid: isConsentValid,
-    //       maleValid: maleValid,
-    //       thumbnailValid: thumbnailValid,
-    //       formErrors: formErrors,
-    //     });
+    this.setState({
+      nameValid: nameValidValue,
+      birthdayValid: birthdayValidValue,
+      countryValid: countryValidValue,
+      isConsentValid: isConsentValidValue,
+      maleValid: maleValidValue,
+      thumbnailValid: thumbnailValidValue,
+      formErrors: formErrorsObj,
+    });
 
     this.props.updateData(this.state);
   };
