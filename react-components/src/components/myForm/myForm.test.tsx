@@ -1,7 +1,6 @@
 import React from 'react';
 import { describe, it } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import MyForm from './myForm';
 
 describe('Tests for MyForm component', () => {

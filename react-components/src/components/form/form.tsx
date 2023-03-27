@@ -1,4 +1,4 @@
-import React, { Component, EventHandler } from 'react';
+import React, { Component } from 'react';
 import './index.css';
 import InputName from '../inputName/inputName';
 import InputBirthday from '../inputBirthday/inputBirthday';
@@ -35,7 +35,7 @@ class Form extends Component<FormProps> {
   handleSubmit = async (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    let fileIMG: string = '';
+    let fileIMG = '';
 
     if (
       this.props.forwardRefInputFileImage.current &&
@@ -159,22 +159,15 @@ class Form extends Component<FormProps> {
   };
 
   validateForm = () => {
-    let {
-      nameValid,
-      birthdayValid,
-      countryValid,
-      isConsentValid,
-      maleValid,
-      thumbnailValid,
-      formValid,
-    } = this.state;
+    const { nameValid, birthdayValid, countryValid, isConsentValid, maleValid, thumbnailValid } =
+      this.state;
 
-    formValid =
+    const formValidValue =
       nameValid && birthdayValid && countryValid && isConsentValid && maleValid && thumbnailValid;
 
-    if (formValid) {
+    if (formValidValue) {
       this.setState({
-        formValid: formValid,
+        formValid: formValidValue,
       });
       this.props.updateData(this.state);
     } else {
@@ -186,7 +179,7 @@ class Form extends Component<FormProps> {
   };
 
   createCard = (formData: IDataForm) => {
-    let { formValid } = this.state;
+    const { formValid } = this.state;
 
     if (formValid) {
       const {
@@ -219,7 +212,7 @@ class Form extends Component<FormProps> {
   };
 
   ressetForm = () => {
-    let { formValid, cardsAr } = this.state;
+    const { formValid, cardsAr } = this.state;
 
     if (formValid) {
       this.props.forwardRefFrom.current?.reset();

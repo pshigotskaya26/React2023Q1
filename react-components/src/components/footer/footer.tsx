@@ -10,6 +10,7 @@ class Footer extends Component {
             className="footer-link footer-link__github"
             href="https://github.com/pshigotskaya26"
             target="_blank"
+            rel="noreferrer"
           >
             <span className="icon icon_github"></span>
           </a>
@@ -18,6 +19,7 @@ class Footer extends Component {
             className="footer-link footer-link__rsschool"
             href="https://rs.school/js/"
             target="_blank"
+            rel="noreferrer"
           >
             <span className="icon icon_rsschool"></span>
           </a>

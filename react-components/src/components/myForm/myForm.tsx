@@ -1,17 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import './index.css';
 import CardsListFrom from '../cardListForm/cardListForm';
-import InputName from '../inputName/inputName';
-import InputBirthday from '../inputBirthday/inputBirthday';
-import SelectCountry from '../selectCountry/selectCountry';
-import CheckboxConsent from '../checkboxConsent/checkboxConsent';
-import InputRadioMale from '../inputRadioMale/inputRadioMale';
-import InputFileImage from '../inputFileImage/inputFileImage';
 import Form from '../form/form';
-import CardMaleEnum from '../../types/enums/cardMaleEnum';
-import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
 import { IProductForm } from '../../types/interfaces/IProductForm';
-import { IDataForm } from '../../types/interfaces/IDataForm';
 import { IStateForm } from '../../types/interfaces/IStateForm';
 
 class MyForm extends Component {

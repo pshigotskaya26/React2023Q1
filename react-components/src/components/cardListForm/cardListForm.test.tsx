@@ -22,7 +22,7 @@ describe('Tests for CardsListForm component', () => {
       screen.getByRole('heading', {
         level: 2,
       })
-    ).toHaveTextContent(`Card's list`);
+    ).toHaveTextContent(`Cards list`);
   });
 
   it('Is a header h3 of the cardItem not empty', () => {
