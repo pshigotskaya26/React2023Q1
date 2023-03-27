@@ -1,0 +1,54 @@
+.my-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  padding-bottom: 30px;
+}
+
+.my-form__content {
+  display: flex;
+  column-gap: 50px;
+  row-gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex: 1 1 100%;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.form-group__second {
+  row-gap: 42px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.name__input,
+.birthday__input,
+.country__select,
+.image__input {
+  padding: 10px;
+  border: 1px solid #fbbe03;
+  border-radius: 3px;
+}
+
+.consent__label {
+  display: flex;
+  column-gap: 10px;
+}
+
+.switcher {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.switcher-group-item {
+  display: flex;
+  column-gap: 10px;
+}
