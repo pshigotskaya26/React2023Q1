@@ -58,6 +58,7 @@ class MyForm extends Component {
   };
 
   render() {
+    console.log('this.state:MY FORM: ', this.state);
     return (
       <Fragment>
         <Form
