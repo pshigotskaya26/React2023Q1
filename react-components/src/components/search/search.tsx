@@ -1,42 +1,34 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 
-class Search extends Component {
-  state = {
-    searchValue: localStorage.getItem('searchValue') || '',
-  };
+const Search = () => {
+  const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('searchValue') || '');
 
-  componentWillUnmount() {
-    localStorage.setItem('searchValue', this.state.searchValue);
-  }
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('searchValue', searchValue);
+    };
+  });
 
-  handleInputSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-
-    this.setState({
-      searchValue: value,
-    });
+    setSearchValue(value);
   };
 
-  render() {
-    const { searchValue } = this.state;
-
-    return (
-      <div className="search">
-        <div className="search__container">
-          <input
-            data-testid="search__input"
-            className="search__input"
-            type="search"
-            placeholder="search something"
-            value={searchValue}
-            onInput={this.handleInputSearchChange}
-          />
-          <button>Search</button>
-        </div>
+  return (
+    <div className="search">
+      <div className="search__container">
+        <input
+          value={searchValue}
+          data-testid="search__input"
+          className="search__input"
+          type="search"
+          placeholder="search something"
+          onInput={handleInputSearchChange}
+        />
+        <button>Search</button>
       </div>
-    );
-  }
-}
-
+    </div>
+  );
+};
 export default Search;
