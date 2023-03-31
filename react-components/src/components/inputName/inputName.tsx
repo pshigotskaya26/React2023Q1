@@ -4,13 +4,12 @@ import './index.css';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import { FormInputs } from 'components/form/form';
 
-type InputNameProps = {
+interface InputNameProps {
   registerAttr: UseFormRegister<FormInputs>;
   errorAttr: FieldErrors<FormInputs>;
-};
+}
 
 const InputName: React.FC<InputNameProps> = (props) => {
-  console.log('errorAttr: ', props.errorAttr);
   return (
     <Fragment>
       <label htmlFor="name">Name:</label>

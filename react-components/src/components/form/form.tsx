@@ -15,9 +15,10 @@ import { IProductForm } from '../../types/interfaces/IProductForm';
 import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
 
-export type FormInputs = {
+export interface FormInputs {
   inputName: string;
-};
+  inputBirthday: string;
+}
 
 export const Form = () => {
   const {
@@ -59,7 +60,18 @@ export const Form = () => {
           </div>
 
           <div className="form-item">
-            <InputBirthday />
+            <InputBirthday registerAttr={register} errorAttr={errors} />
+            {/* <label htmlFor="birthday">Birthday:</label>
+            <input
+              id="birthday"
+              type="date"
+              className="birthday__input"
+              {...register('inputBirthday', {
+                validate: (value) =>
+                  Date.parse(value) <= Date.now() || "Birthday must be less now' date",
+              })}
+            />
+            {errors.inputBirthday && <ErrorMessage errorMessage={errors.inputBirthday?.message} />} */}
           </div>
           <div className="form-item">
             <SelectCountry />
