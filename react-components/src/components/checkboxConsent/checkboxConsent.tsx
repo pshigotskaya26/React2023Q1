@@ -2,6 +2,19 @@ import React, { Component, Fragment } from 'react';
 import './index.css';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 
+const CheckboxConsent = () => {
+  return (
+    <Fragment>
+      <label htmlFor="consent" className="consent__label">
+        <input id="consent" className="consent__checkbox" type="checkbox" />I consent to my personal
+        data
+      </label>
+      <ErrorMessage errorMessage={''} />
+    </Fragment>
+  );
+};
+
+/*      
 interface CheckboxConsentProps {
   forwardRef: React.RefObject<HTMLInputElement>;
   name: string;
@@ -28,5 +41,5 @@ class CheckboxConsent extends Component<CheckboxConsentProps> {
     );
   }
 }
-
+*/
 export default CheckboxConsent;

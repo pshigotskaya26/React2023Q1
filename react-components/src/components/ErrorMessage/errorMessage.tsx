@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 
 interface ErrorMessageProps {
-  errorMessage: string;
+  errorMessage: string | undefined;
 }
 
 class ErrorMessage extends Component<ErrorMessageProps> {

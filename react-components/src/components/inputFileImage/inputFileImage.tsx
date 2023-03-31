@@ -2,6 +2,18 @@ import React, { Component, Fragment } from 'react';
 import './index.css';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 
+const InputFileImage = () => {
+  return (
+    <Fragment>
+      <label htmlFor="image" className="image__label">
+        Choose image:
+      </label>
+      <input type="file" accept="image/*" className="image__input" />
+      <ErrorMessage errorMessage={''} />
+    </Fragment>
+  );
+};
+/*
 interface InputFileImageProps {
   forwardRef: React.RefObject<HTMLInputElement>;
   name: string;
@@ -23,5 +35,5 @@ class InputFileImage extends Component<InputFileImageProps> {
     );
   }
 }
-
+*/
 export default InputFileImage;

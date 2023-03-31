@@ -3,6 +3,25 @@ import './index.css';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import CardCountryEnum from '../../types/enums/cardCountryEnum';
 
+const SelectCountry = () => {
+  return (
+    <Fragment>
+      <label htmlFor="country">Country:</label>
+      <select className="country__select">
+        <option value="" hidden>
+          No selected
+        </option>
+        <option value={CardCountryEnum.USA}>{CardCountryEnum.USA}</option>
+        <option value={CardCountryEnum.BELARUS}>{CardCountryEnum.BELARUS}</option>
+        <option value={CardCountryEnum.ITALY}>{CardCountryEnum.ITALY}</option>
+        <option value={CardCountryEnum.RUSSIA}>{CardCountryEnum.RUSSIA}</option>
+        <option value={CardCountryEnum.POLAND}>{CardCountryEnum.POLAND}</option>
+      </select>
+      <ErrorMessage errorMessage={''} />
+    </Fragment>
+  );
+};
+/*
 interface SelectCountryProps {
   forwardRef: React.RefObject<HTMLSelectElement>;
   name: string;
@@ -31,5 +50,5 @@ class SelectCountry extends Component<SelectCountryProps> {
     );
   }
 }
-
+*/
 export default SelectCountry;

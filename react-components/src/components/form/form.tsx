@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useForm } from 'react-hook-form';
 import './index.css';
 import InputName from '../inputName/inputName';
 import InputBirthday from '../inputBirthday/inputBirthday';
@@ -6,6 +7,7 @@ import SelectCountry from '../selectCountry/selectCountry';
 import CheckboxConsent from '../checkboxConsent/checkboxConsent';
 import InputRadioMale from '../inputRadioMale/inputRadioMale';
 import InputFileImage from '../inputFileImage/inputFileImage';
+import ErrorMessage from '../ErrorMessage/errorMessage';
 
 import { IStateForm } from '../../types/interfaces/IStateForm';
 import { IDataForm } from '../../types/interfaces/IDataForm';
@@ -13,8 +15,80 @@ import { IProductForm } from '../../types/interfaces/IProductForm';
 import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
 
+export type FormInputs = {
+  inputName: string;
+};
+
+export const Form = () => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    clearErrors,
+  } = useForm<FormInputs>({ reValidateMode: 'onSubmit' });
+
+  const onSubmit = (data: FormInputs) => console.log(data);
+
+  return (
+    <form className="my-form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="my-form__content">
+        <div className="form-group form-group__first">
+          {/* <div className="form-item">
+            <label htmlFor="name">Name:</label>
+            <input
+              id="name"
+              type="text"
+              className="name__input"
+              placeholder="enter name"
+              data-testid="name__input"
+              {...register('inputName', {
+                pattern: {
+                  value: /^[A-ZА-Я]{1}[а-яА-Яa-zA-Z]{2,}$/,
+                  message:
+                    "Name is invalid: first letter must be in Upper case and name's length must be >=3", // JS only: <p>error message</p> TS only support string
+                },
+                required:
+                  'Name is invalid: first letter must be in Upper case and name"s length must be >=3',
+              })}
+            />
+            {errors.inputName?.message && <ErrorMessage errorMessage={errors.inputName.message} />}
+          </div> */}
+
+          <div className="form-item">
+            <InputName registerAttr={register} errorAttr={errors} />
+          </div>
+
+          <div className="form-item">
+            <InputBirthday />
+          </div>
+          <div className="form-item">
+            <SelectCountry />
+          </div>
+        </div>
+        <div className="form-group form-group__second">
+          <div className="form-item">
+            <CheckboxConsent />
+          </div>
+          <div className="form-item">
+            <InputRadioMale />
+          </div>
+          <div className="form-item">
+            <InputFileImage />
+          </div>
+        </div>
+      </div>
+      <div className="my-form__button">
+        <button className="btn btn-submit">Submit</button>
+      </div>
+    </form>
+  );
+};
+
+//export default Form;
+
+/*
 interface FormProps {
-  passedState: IStateForm;
+  //passedState: IStateForm;
   forwardRefFrom: React.RefObject<HTMLFormElement>;
   forwardRefInputName: React.RefObject<HTMLInputElement>;
   forwardRefInputBirthday: React.RefObject<HTMLInputElement>;
@@ -23,7 +97,7 @@ interface FormProps {
   forwardRefInputRadioMaleFirst: React.RefObject<HTMLInputElement>;
   forwardRefInputRadioMaleSecond: React.RefObject<HTMLInputElement>;
   forwardRefInputFileImage: React.RefObject<HTMLInputElement>;
-  updateData: (value: IStateForm) => void;
+  //updateData: (value: IStateForm) => void;
 }
 
 class Form extends Component<FormProps> {
@@ -284,3 +358,5 @@ class Form extends Component<FormProps> {
 }
 
 export default Form;
+
+*/

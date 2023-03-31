@@ -1,10 +1,68 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import './index.css';
 import CardsListFrom from '../cardListForm/cardListForm';
-import Form from '../form/form';
+import { Form } from '../form/form';
 import { IProductForm } from '../../types/interfaces/IProductForm';
 import { IStateForm } from '../../types/interfaces/IStateForm';
+import { IFormErrors } from '../../types/interfaces/IFormErrors';
 
+const MyForm = () => {
+  const [cardsAr, setCardsAr] = useState<IProductForm[]>([]);
+  const [formErrors, setFormErrors] = useState<IFormErrors>({
+    name: '',
+    birthday: '',
+    country: '',
+    isConsent: '',
+    male: '',
+    thumbnail: '',
+  });
+  const [nameValid, setNameValid] = useState<boolean>(false);
+  const [birthdayValid, setBirthdayValid] = useState<boolean>(false);
+  const [countryValid, setCountryValid] = useState<boolean>(false);
+  const [isConsentValid, setIsConsentValid] = useState<boolean>(false);
+  const [maleValid, setMaleValid] = useState<boolean>(false);
+  const [thumbnailValid, setThumbnailValid] = useState<boolean>(false);
+  const [formValid, setFormValid] = useState<boolean>(false);
+
+  const formRef = React.createRef<HTMLFormElement>();
+  const inputNameRef = React.createRef<HTMLInputElement>();
+  const inputBirthdayRef = React.createRef<HTMLInputElement>();
+  const selectCountryRef = React.createRef<HTMLSelectElement>();
+  const checkboxConsentRef = React.createRef<HTMLInputElement>();
+  const radioMaleFirstRef = React.createRef<HTMLInputElement>();
+  const radioMaleSecondRef = React.createRef<HTMLInputElement>();
+  const inputImageRef = React.createRef<HTMLInputElement>();
+
+  //   const updateData = (value: IStateForm) => {
+  //     this.setState({
+  //       cardsAr: value.cardsAr,
+  //       formErrors: {
+  //         name: value.formErrors.name,
+  //         birthday: value.formErrors.birthday,
+  //         country: value.formErrors.country,
+  //         isConsent: value.formErrors.isConsent,
+  //         male: value.formErrors.male,
+  //         thumbnail: value.formErrors.thumbnail,
+  //       },
+  //       nameValid: value.nameValid,
+  //       birthdayValid: value.birthdayValid,
+  //       countryValid: value.countryValid,
+  //       isConsentValid: value.isConsentValid,
+  //       maleValid: value.maleValid,
+  //       thumbnailValid: value.thumbnailValid,
+  //       formValid: value.formValid,
+  //     });
+  //   };
+
+  return (
+    <Fragment>
+      <Form />
+      <CardsListFrom formValidValue={formValid} cards={cardsAr} />
+    </Fragment>
+  );
+};
+
+/*
 class MyForm extends Component {
   baseCardsArray: IProductForm[] = [];
 
@@ -77,5 +135,5 @@ class MyForm extends Component {
     );
   }
 }
-
+*/
 export default MyForm;
