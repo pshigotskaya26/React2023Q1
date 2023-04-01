@@ -27,10 +27,14 @@ export interface FormInputs {
 
 interface FormProps {
   cards: IProductForm[];
+  updateData: (value: IProductForm[]) => void;
 }
 
 export const Form: React.FC<FormProps> = (props) => {
   console.log('props: ', props.cards);
+
+  const [cardsFormAr, setCardsFormAr] = useState<IProductForm[]>([]);
+
   const {
     register,
     formState: { errors, isSubmitSuccessful },
@@ -50,14 +54,32 @@ export const Form: React.FC<FormProps> = (props) => {
 
   const onSubmit = (data: FormInputs) => {
     console.log('date in submit: ', data);
-    data.inputName ? setInputName(data.inputName) : setInputName('');
-    data.inputBirthday ? setInputBirthday(data.inputBirthday) : setInputBirthday('');
-    data.selectCountry ? setSelectCountry(data.selectCountry) : setSelectCountry('');
-    data.checkboxConsent ? setCheckboxConsent(data.checkboxConsent) : setCheckboxConsent('');
-    data.inputRadioMale ? setInputRadioMale(data.inputRadioMale) : setInputRadioMale('');
-    data.inputFileImage
-      ? setInputFileImage(URL.createObjectURL(data.inputFileImage[0]))
-      : setInputFileImage('');
+    const img = URL.createObjectURL(data.inputFileImage[0]);
+
+    // setInputName(data.inputName);
+    // setInputBirthday(data.inputBirthday);
+    //setSelectCountry(data.selectCountry);
+    //setCheckboxConsent(data.checkboxConsent);
+    //setInputRadioMale(data.inputRadioMale);
+    //setInputFileImage(URL.createObjectURL(data.inputFileImage[0]));
+
+    //     data.inputName ? setInputName(data.inputName) : setInputName('');
+    //     data.inputBirthday ? setInputBirthday(data.inputBirthday) : setInputBirthday('');
+    //     data.selectCountry ? setSelectCountry(data.selectCountry) : setSelectCountry('');
+    //     data.checkboxConsent ? setCheckboxConsent(data.checkboxConsent) : setCheckboxConsent('');
+    //     data.inputRadioMale ? setInputRadioMale(data.inputRadioMale) : setInputRadioMale('');
+    //     data.inputFileImage
+    //       ? setInputFileImage(URL.createObjectURL(data.inputFileImage[0]))
+    //       : setInputFileImage('');
+
+    createCard(
+      data.inputName,
+      data.inputBirthday,
+      data.selectCountry,
+      data.checkboxConsent,
+      data.inputRadioMale,
+      img
+    );
 
     //     isSubmitSuccessful =
     //       data.checkboxConsent &&
@@ -67,12 +89,36 @@ export const Form: React.FC<FormProps> = (props) => {
     //       data.inputRadioMale &&
     //       data.selectCountry;
   };
+
+  const createCard = (
+    name: string,
+    birthday: string,
+    country: string,
+    consent: string,
+    male: string,
+    image: string
+  ) => {
+    const card: IProductForm = {
+      id: cardsFormAr.length + 1,
+      name: name,
+      birthday: birthday,
+      country: country,
+      isConsent: consent,
+      male: male,
+      thumbnail: image,
+    };
+
+    cardsFormAr.push(card);
+    setCardsFormAr(cardsFormAr);
+    props.updateData(cardsFormAr);
+  };
   console.log('inputName: ', inputName);
   console.log('inputBirthday: ', inputBirthday);
   console.log('selectCountry: ', selectCountry);
   console.log('checkboxConsent: ', checkboxConsent);
   console.log('inputRadioMale: ', inputRadioMale);
   console.log('inputFileImage: ', inputFileImage);
+
   //   useEffect(() => {
   //     if (isSubmitSuccessful) {
   //       console.log('reset in useeffect: ');

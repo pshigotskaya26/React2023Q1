@@ -9,6 +9,10 @@ import { IFormErrors } from '../../types/interfaces/IFormErrors';
 const MyForm = () => {
   const [cardsAr, setCardsAr] = useState<IProductForm[]>([]);
 
+  const updateData = (CardsFromForm: IProductForm[]) => {
+    setCardsAr(CardsFromForm);
+  };
+
   //   const updateData = (value: IStateForm) => {
   //     this.setState({
   //       cardsAr: value.cardsAr,
@@ -29,10 +33,10 @@ const MyForm = () => {
   //       formValid: value.formValid,
   //     });
   //   };
-
+  console.log('cardsAr MYFORM: ', cardsAr);
   return (
     <Fragment>
-      <Form cards={cardsAr} />
+      <Form cards={cardsAr} updateData={updateData} />
       <CardsListFrom cards={cardsAr} />
     </Fragment>
   );
