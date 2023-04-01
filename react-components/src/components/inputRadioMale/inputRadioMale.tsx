@@ -57,47 +57,4 @@ const InputRadioMale: React.FC<InputRadioMaleProps> = (props) => {
   );
 };
 
-/*      
-interface InputRadioMaleProps {
-  forwardRefFirst: React.RefObject<HTMLInputElement>;
-  forwardRefSecond: React.RefObject<HTMLInputElement>;
-  name: string;
-}
-
-class InputRadioMale extends Component<InputRadioMaleProps> {
-  constructor(props: InputRadioMaleProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <Fragment>
-        <label htmlFor="switcher" className="switcher__label">
-          Male/Female:
-        </label>
-        <fieldset id="switcher-group" className="switcher">
-          <label className="switcher-group-item">
-            <input
-              ref={this.props.forwardRefFirst}
-              type="radio"
-              name="switcher"
-              value={CardMaleEnum.MALE}
-            />
-            {CardMaleEnum.MALE}
-          </label>
-          <label className="switcher-group-item">
-            <input
-              ref={this.props.forwardRefSecond}
-              type="radio"
-              name="switcher"
-              value={CardMaleEnum.FEMALE}
-            />
-            {CardMaleEnum.FEMALE}
-          </label>
-        </fieldset>
-        {this.props.name && <ErrorMessage errorMessage={this.props.name} />}
-      </Fragment>
-    );
-  }
-}
-*/
 export default InputRadioMale;

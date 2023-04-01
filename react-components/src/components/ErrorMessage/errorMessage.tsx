@@ -1,21 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './index.css';
 
 interface ErrorMessageProps {
   errorMessage: string | undefined;
 }
 
-class ErrorMessage extends Component<ErrorMessageProps> {
-  constructor(props: ErrorMessageProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <span data-testid="error-message" className="error-message">
-        {this.props.errorMessage}
-      </span>
-    );
-  }
-}
+const ErrorMessage: React.FC<ErrorMessageProps> = (props) => {
+  return (
+    <span data-testid="error-message" className="error-message">
+      {props.errorMessage}
+    </span>
+  );
+};
 
 export default ErrorMessage;
