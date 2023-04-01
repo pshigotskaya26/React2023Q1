@@ -21,6 +21,7 @@ export interface FormInputs {
   inputBirthday: string;
   selectCountry: string;
   inputRadioMale: string;
+  checkboxConsent: string;
 }
 
 export const Form = () => {
@@ -29,7 +30,10 @@ export const Form = () => {
     formState: { errors },
     handleSubmit,
     clearErrors,
-  } = useForm<FormInputs>({ reValidateMode: 'onSubmit' });
+    setValue,
+  } = useForm<FormInputs>({
+    reValidateMode: 'onSubmit',
+  });
 
   const onSubmit = (data: FormInputs) => console.log(data);
 
@@ -107,7 +111,27 @@ export const Form = () => {
         </div>
         <div className="form-group form-group__second">
           <div className="form-item">
-            <CheckboxConsent />
+            <CheckboxConsent registerAttr={register} errorAttr={errors} />
+            {/* <label htmlFor="consent" className="consent__label">
+              <input
+                {...register('checkboxConsent', {
+                  validate: (value) => {
+                    if (value) {
+                      return value;
+                    } else if (!value) {
+                      return 'Consent is not choosen';
+                    }
+                  },
+                })}
+                id="consent"
+                className="consent__checkbox"
+                type="checkbox"
+              />
+              I consent to my personal data
+            </label>
+            {errors.checkboxConsent?.message && (
+              <ErrorMessage errorMessage={errors.checkboxConsent.message} />
+            )} */}
           </div>
           <div className="form-item">
             <InputRadioMale registerAttr={register} errorAttr={errors} />
