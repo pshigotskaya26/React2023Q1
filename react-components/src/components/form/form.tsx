@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './index.css';
 import InputName from '../inputName/inputName';
@@ -28,15 +28,24 @@ export interface FormInputs {
 export const Form = () => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
     handleSubmit,
-    clearErrors,
-    setValue,
+    reset,
   } = useForm<FormInputs>({
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmit = (data: FormInputs) => console.log(data);
+  const onSubmit = (data: FormInputs) => {
+    console.log(data);
+
+    console.log('isSubmitSuccessful: ', isSubmitSuccessful);
+  };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful]);
 
   return (
     <form className="my-form" onSubmit={handleSubmit(onSubmit)}>
