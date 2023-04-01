@@ -17,13 +17,9 @@ const InputFileImage: React.FC<InputFileImageProps> = (props) => {
       </label>
       <input
         {...props.registerAttr('inputFileImage', {
-          validate: (value) => {
-            if (value.length !== 0) {
-              console.log('value: ', value);
-              return value;
-            } else if (value.length === 0) {
-              return 'Image is not choosen';
-            }
+          required: 'Image is not choosen',
+          validate: {
+            format: (files: FileList) => (files && files.length !== 0) || 'Image is not choosen',
           },
         })}
         type="file"

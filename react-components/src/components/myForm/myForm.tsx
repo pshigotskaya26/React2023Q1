@@ -8,30 +8,6 @@ import { IFormErrors } from '../../types/interfaces/IFormErrors';
 
 const MyForm = () => {
   const [cardsAr, setCardsAr] = useState<IProductForm[]>([]);
-  const [formErrors, setFormErrors] = useState<IFormErrors>({
-    name: '',
-    birthday: '',
-    country: '',
-    isConsent: '',
-    male: '',
-    thumbnail: '',
-  });
-  const [nameValid, setNameValid] = useState<boolean>(false);
-  const [birthdayValid, setBirthdayValid] = useState<boolean>(false);
-  const [countryValid, setCountryValid] = useState<boolean>(false);
-  const [isConsentValid, setIsConsentValid] = useState<boolean>(false);
-  const [maleValid, setMaleValid] = useState<boolean>(false);
-  const [thumbnailValid, setThumbnailValid] = useState<boolean>(false);
-  const [formValid, setFormValid] = useState<boolean>(false);
-
-  const formRef = React.createRef<HTMLFormElement>();
-  const inputNameRef = React.createRef<HTMLInputElement>();
-  const inputBirthdayRef = React.createRef<HTMLInputElement>();
-  const selectCountryRef = React.createRef<HTMLSelectElement>();
-  const checkboxConsentRef = React.createRef<HTMLInputElement>();
-  const radioMaleFirstRef = React.createRef<HTMLInputElement>();
-  const radioMaleSecondRef = React.createRef<HTMLInputElement>();
-  const inputImageRef = React.createRef<HTMLInputElement>();
 
   //   const updateData = (value: IStateForm) => {
   //     this.setState({
@@ -56,8 +32,8 @@ const MyForm = () => {
 
   return (
     <Fragment>
-      <Form />
-      <CardsListFrom formValidValue={formValid} cards={cardsAr} />
+      <Form cards={cardsAr} />
+      <CardsListFrom cards={cardsAr} />
     </Fragment>
   );
 };

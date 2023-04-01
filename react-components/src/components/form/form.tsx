@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './index.css';
 import InputName from '../inputName/inputName';
@@ -22,10 +22,15 @@ export interface FormInputs {
   selectCountry: string;
   inputRadioMale: string;
   checkboxConsent: string;
-  inputFileImage: string;
+  inputFileImage: FileList;
 }
 
-export const Form = () => {
+interface FormProps {
+  cards: IProductForm[];
+}
+
+export const Form: React.FC<FormProps> = (props) => {
+  console.log('props: ', props.cards);
   const {
     register,
     formState: { errors, isSubmitSuccessful },
@@ -35,17 +40,45 @@ export const Form = () => {
     reValidateMode: 'onSubmit',
   });
 
+  const [formCardsAr, setFormCardsAr] = useState<IProductForm[]>(props.cards);
+  const [inputName, setInputName] = useState<string>('');
+  const [inputBirthday, setInputBirthday] = useState<string>('');
+  const [selectCountry, setSelectCountry] = useState<string>('');
+  const [checkboxConsent, setCheckboxConsent] = useState<string>('');
+  const [inputRadioMale, setInputRadioMale] = useState<string>('');
+  const [inputFileImage, setInputFileImage] = useState<string>('');
+
   const onSubmit = (data: FormInputs) => {
-    console.log(data);
+    console.log('date in submit: ', data);
+    data.inputName ? setInputName(data.inputName) : setInputName('');
+    data.inputBirthday ? setInputBirthday(data.inputBirthday) : setInputBirthday('');
+    data.selectCountry ? setSelectCountry(data.selectCountry) : setSelectCountry('');
+    data.checkboxConsent ? setCheckboxConsent(data.checkboxConsent) : setCheckboxConsent('');
+    data.inputRadioMale ? setInputRadioMale(data.inputRadioMale) : setInputRadioMale('');
+    data.inputFileImage
+      ? setInputFileImage(URL.createObjectURL(data.inputFileImage[0]))
+      : setInputFileImage('');
 
-    console.log('isSubmitSuccessful: ', isSubmitSuccessful);
+    //     isSubmitSuccessful =
+    //       data.checkboxConsent &&
+    //       data.inputBirthday &&
+    //       data.inputFileImage &&
+    //       data.inputName &&
+    //       data.inputRadioMale &&
+    //       data.selectCountry;
   };
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [isSubmitSuccessful]);
+  console.log('inputName: ', inputName);
+  console.log('inputBirthday: ', inputBirthday);
+  console.log('selectCountry: ', selectCountry);
+  console.log('checkboxConsent: ', checkboxConsent);
+  console.log('inputRadioMale: ', inputRadioMale);
+  console.log('inputFileImage: ', inputFileImage);
+  //   useEffect(() => {
+  //     if (isSubmitSuccessful) {
+  //       console.log('reset in useeffect: ');
+  //       reset();
+  //     }
+  //   }, [reset, isSubmitSuccessful]);
 
   return (
     <form className="my-form" onSubmit={handleSubmit(onSubmit)}>
@@ -193,13 +226,9 @@ export const Form = () => {
             </label>
             <input
               {...register('inputFileImage', {
-                validate: (value) => {
-                  if (value.length !== 0) {
-                    console.log('value: ', value);
-                    return value;
-                  } else if (value.length === 0) {
-                    return 'Image is not choosen';
-                  }
+                validate: {
+                  format: (files: FileList) =>
+                    (files && files.length !== 0) || 'Image is not choosen',
                 },
               })}
               type="file"
