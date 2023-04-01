@@ -22,6 +22,7 @@ export interface FormInputs {
   selectCountry: string;
   inputRadioMale: string;
   checkboxConsent: string;
+  inputFileImage: string;
 }
 
 export const Form = () => {
@@ -177,7 +178,28 @@ export const Form = () => {
             )} */}
           </div>
           <div className="form-item">
-            <InputFileImage />
+            <InputFileImage registerAttr={register} errorAttr={errors} />
+            {/* <label htmlFor="image" className="image__label">
+              Choose image:
+            </label>
+            <input
+              {...register('inputFileImage', {
+                validate: (value) => {
+                  if (value.length !== 0) {
+                    console.log('value: ', value);
+                    return value;
+                  } else if (value.length === 0) {
+                    return 'Image is not choosen';
+                  }
+                },
+              })}
+              type="file"
+              accept="image/*"
+              className="image__input"
+            />
+            {errors.inputFileImage?.message && (
+              <ErrorMessage errorMessage={errors.inputFileImage.message} />
+            )} */}
           </div>
         </div>
       </div>
