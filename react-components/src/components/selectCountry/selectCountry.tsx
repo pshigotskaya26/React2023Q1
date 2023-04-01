@@ -1,13 +1,31 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FormInputs } from 'components/form/form';
 import './index.css';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import CardCountryEnum from '../../types/enums/cardCountryEnum';
 
-const SelectCountry = () => {
+interface SelectCountryProps {
+  registerAttr: UseFormRegister<FormInputs>;
+  errorAttr: FieldErrors<FormInputs>;
+}
+
+const SelectCountry: React.FC<SelectCountryProps> = (props) => {
   return (
     <Fragment>
       <label htmlFor="country">Country:</label>
-      <select className="country__select">
+      <select
+        className="country__select"
+        {...props.registerAttr('selectCountry', {
+          validate: (value) => {
+            if (value === '') {
+              return 'Country is not choosen';
+            } else {
+              return true;
+            }
+          },
+        })}
+      >
         <option value="" hidden>
           No selected
         </option>
@@ -17,7 +35,9 @@ const SelectCountry = () => {
         <option value={CardCountryEnum.RUSSIA}>{CardCountryEnum.RUSSIA}</option>
         <option value={CardCountryEnum.POLAND}>{CardCountryEnum.POLAND}</option>
       </select>
-      <ErrorMessage errorMessage={''} />
+      {props.errorAttr.selectCountry?.message && (
+        <ErrorMessage errorMessage={props.errorAttr.selectCountry.message} />
+      )}
     </Fragment>
   );
 };

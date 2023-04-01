@@ -14,10 +14,12 @@ import { IDataForm } from '../../types/interfaces/IDataForm';
 import { IProductForm } from '../../types/interfaces/IProductForm';
 import cardIsConsentEnum from '../../types/enums/cardIsConsentEnum';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
+import CardCountryEnum from '../../types/enums/cardCountryEnum';
 
 export interface FormInputs {
   inputName: string;
   inputBirthday: string;
+  selectCountry: string;
 }
 
 export const Form = () => {
@@ -74,7 +76,32 @@ export const Form = () => {
             {errors.inputBirthday && <ErrorMessage errorMessage={errors.inputBirthday?.message} />} */}
           </div>
           <div className="form-item">
-            <SelectCountry />
+            <SelectCountry registerAttr={register} errorAttr={errors} />
+            {/* <label htmlFor="country">Country:</label>
+            <select
+              className="country__select"
+              {...register('selectCountry', {
+                validate: (value) => {
+                  if (value === '') {
+                    return 'Country is not choosen';
+                  } else {
+                    return true;
+                  }
+                },
+              })}
+            >
+              <option value="" hidden>
+                No selected
+              </option>
+              <option value={CardCountryEnum.USA}>{CardCountryEnum.USA}</option>
+              <option value={CardCountryEnum.BELARUS}>{CardCountryEnum.BELARUS}</option>
+              <option value={CardCountryEnum.ITALY}>{CardCountryEnum.ITALY}</option>
+              <option value={CardCountryEnum.RUSSIA}>{CardCountryEnum.RUSSIA}</option>
+              <option value={CardCountryEnum.POLAND}>{CardCountryEnum.POLAND}</option>
+            </select>
+            {errors.selectCountry?.message && (
+              <ErrorMessage errorMessage={errors.selectCountry.message} />
+            )} */}
           </div>
         </div>
         <div className="form-group form-group__second">
