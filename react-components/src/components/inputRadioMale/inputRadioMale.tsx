@@ -1,9 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import './index.css';
 import ErrorMessage from '../ErrorMessage/errorMessage';
 import CardMaleEnum from '../../types/enums/cardMaleEnum';
+import { FormInputs } from 'components/form/form';
 
-const InputRadioMale = () => {
+interface InputRadioMaleProps {
+  registerAttr: UseFormRegister<FormInputs>;
+  errorAttr: FieldErrors<FormInputs>;
+}
+
+const InputRadioMale: React.FC<InputRadioMaleProps> = (props) => {
   return (
     <Fragment>
       <label htmlFor="switcher" className="switcher__label">
@@ -11,15 +18,41 @@ const InputRadioMale = () => {
       </label>
       <fieldset id="switcher-group" className="switcher">
         <label className="switcher-group-item">
-          <input type="radio" name="switcher" value={CardMaleEnum.MALE} />
+          <input
+            {...props.registerAttr('inputRadioMale', {
+              validate: (value) => {
+                if (value && (value === CardMaleEnum.MALE || value === CardMaleEnum.FEMALE)) {
+                  return true;
+                } else if (!value) {
+                  return 'Male is not choosen';
+                }
+              },
+            })}
+            type="radio"
+            value={CardMaleEnum.MALE}
+          />
           {CardMaleEnum.MALE}
         </label>
         <label className="switcher-group-item">
-          <input type="radio" name="switcher" value={CardMaleEnum.FEMALE} />
+          <input
+            {...props.registerAttr('inputRadioMale', {
+              validate: (value) => {
+                if (value && (value === CardMaleEnum.MALE || value === CardMaleEnum.FEMALE)) {
+                  return true;
+                } else if (!value) {
+                  return 'Male is not choosen';
+                }
+              },
+            })}
+            type="radio"
+            value={CardMaleEnum.FEMALE}
+          />
           {CardMaleEnum.FEMALE}
         </label>
       </fieldset>
-      <ErrorMessage errorMessage={''} />
+      {props.errorAttr.inputRadioMale?.message && (
+        <ErrorMessage errorMessage={props.errorAttr.inputRadioMale.message} />
+      )}
     </Fragment>
   );
 };

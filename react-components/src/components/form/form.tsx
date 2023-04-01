@@ -20,6 +20,7 @@ export interface FormInputs {
   inputName: string;
   inputBirthday: string;
   selectCountry: string;
+  inputRadioMale: string;
 }
 
 export const Form = () => {
@@ -109,7 +110,47 @@ export const Form = () => {
             <CheckboxConsent />
           </div>
           <div className="form-item">
-            <InputRadioMale />
+            <InputRadioMale registerAttr={register} errorAttr={errors} />
+            {/* <label htmlFor="switcher" className="switcher__label">
+              Male/Female:
+            </label>
+            <fieldset id="switcher-group" className="switcher">
+              <label className="switcher-group-item">
+                <input
+                  {...register('inputRadioMale', {
+                    validate: (value) => {
+                      if (value && (value === CardMaleEnum.MALE || value === CardMaleEnum.FEMALE)) {
+                        return true;
+                      } else if (!value) {
+                        return 'Male is not choosen';
+                      }
+                    },
+                  })}
+                  type="radio"
+                  value={CardMaleEnum.MALE}
+                />
+                {CardMaleEnum.MALE}
+              </label>
+              <label className="switcher-group-item">
+                <input
+                  {...register('inputRadioMale', {
+                    validate: (value) => {
+                      if (value && (value === CardMaleEnum.MALE || value === CardMaleEnum.FEMALE)) {
+                        return true;
+                      } else if (!value) {
+                        return 'Male is not choosen';
+                      }
+                    },
+                  })}
+                  type="radio"
+                  value={CardMaleEnum.FEMALE}
+                />
+                {CardMaleEnum.FEMALE}
+              </label>
+            </fieldset>
+            {errors.inputRadioMale?.message && (
+              <ErrorMessage errorMessage={errors.inputRadioMale.message} />
+            )} */}
           </div>
           <div className="form-item">
             <InputFileImage />
