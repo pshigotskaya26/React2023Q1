@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './index.css';
 import InputName from '../inputName/inputName';
@@ -24,8 +24,6 @@ interface FormProps {
 }
 
 export const Form: React.FC<FormProps> = (props) => {
-  const [cardsFormAr, setCardsFormAr] = useState<IProductForm[]>([]);
-
   const {
     register,
     formState: { errors, isSubmitSuccessful },
@@ -36,7 +34,6 @@ export const Form: React.FC<FormProps> = (props) => {
   });
 
   const onSubmit = (data: FormInputs) => {
-    console.log('date in submit: ', data);
     const img = URL.createObjectURL(data.inputFileImage[0]);
 
     createCard(
@@ -58,7 +55,7 @@ export const Form: React.FC<FormProps> = (props) => {
     image: string
   ) => {
     const card: IProductForm = {
-      id: cardsFormAr.length + 1,
+      id: props.cards.length + 1,
       name: name,
       birthday: birthday,
       country: country,
@@ -67,17 +64,14 @@ export const Form: React.FC<FormProps> = (props) => {
       thumbnail: image,
     };
 
-    cardsFormAr.push(card);
-    setCardsFormAr(cardsFormAr);
-    props.updateData(cardsFormAr);
+    props.updateData(props.cards.concat([card]));
   };
 
-  //   useEffect(() => {
-  //     if (isSubmitSuccessful) {
-  //       console.log('reset in useeffect: ');
-  //       reset();
-  //     }
-  //   }, [reset, isSubmitSuccessful]);
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [reset, isSubmitSuccessful]);
 
   return (
     <form className="my-form" onSubmit={handleSubmit(onSubmit)}>
