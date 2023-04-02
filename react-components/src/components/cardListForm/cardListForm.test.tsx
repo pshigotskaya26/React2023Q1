@@ -17,7 +17,7 @@ const mockData = [
 
 describe('Tests for CardsListForm component', () => {
   it('Has CardsListForm a header h2', () => {
-    render(<CardsListForm cards={mockData} formValidValue={true} />);
+    render(<CardsListForm cards={mockData} />);
     expect(
       screen.getByRole('heading', {
         level: 2,
@@ -26,7 +26,7 @@ describe('Tests for CardsListForm component', () => {
   });
 
   it('Is a header h3 of the cardItem not empty', () => {
-    render(<CardsListForm cards={mockData} formValidValue={true} />);
+    render(<CardsListForm cards={mockData} />);
     expect(screen.getByTestId('cards__container')).not.toBeEmptyDOMElement();
   });
 });
