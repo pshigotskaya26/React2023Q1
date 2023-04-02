@@ -1,0 +1,12 @@
+.card-item__name {
+  text-align: center;
+}
+
+.card-name {
+  font-size: 18px;
+}
+
+.card-country {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e8e8e8;
+}
