@@ -42,7 +42,7 @@ const CardItemForm: React.FC<CardItemFormProps> = (props) => {
             <span data-testid="card-consent" className="card-text card-consent__text">
               Is consent:
             </span>
-            <span className="card-value card-consent__value">
+            <span data-testid="card-consent-value" className="card-value card-consent__value">
               {props.product.isConsent ? cardIsConsentEnum.AGREE : cardIsConsentEnum.DISAGREE}
             </span>
           </div>

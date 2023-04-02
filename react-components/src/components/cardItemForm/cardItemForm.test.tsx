@@ -19,6 +19,11 @@ describe('Tests for CardItemForm component', () => {
     expect(screen.getByTestId('card-birthday')).toHaveTextContent('Birthday');
   });
 
+  it('Has field IsConsent of the CardItemForm value agree', () => {
+    render(<CardItemForm product={mockData} />);
+    expect(screen.getByTestId('card-consent-value')).toHaveTextContent('agree');
+  });
+
   it('Is a header h3 of the CardItemForm not empty', () => {
     render(<CardItemForm product={mockData} />);
     expect(
@@ -33,33 +38,4 @@ describe('Tests for CardItemForm component', () => {
 
     expect(screen.getByRole('img')).toBeTruthy();
   });
-
-  // it('Is cart-category not empty', () => {
-  //   render(<CardItemForm product={mockData} />);
-
-  //   expect(screen.getByTestId('card-category')).not.toBeEmptyDOMElement();
-  // });
-
-  // it('Has cardItem a brand text', () => {
-  //   render(<CardItemForm product={mockData} />);
-  //   expect(screen.getByTestId('card-brand')).toHaveTextContent('Brand');
-  // });
-
-  // it('Is cart-brand not empty', () => {
-  //   render(<CardItemForm product={mockData} />);
-
-  //   expect(screen.getByTestId('card-brand')).not.toBeEmptyDOMElement();
-  // });
-
-  // it('Has cardItem a image tag', () => {
-  //   render(<CardItemForm product={mockData} />);
-
-  //   expect(screen.getByRole('img')).toBeTruthy();
-  // });
-
-  // it('Is cart-raiting not empty', () => {
-  //   render(<CardItemForm product={mockData} />);
-
-  //   expect(screen.getByTestId('card-raiting')).not.toBeEmptyDOMElement();
-  // });
 });
