@@ -25,6 +25,7 @@ const InputFileImage: React.FC<InputFileImageProps> = (props) => {
         type="file"
         accept="image/*"
         className="image__input"
+        data-testid="image__input"
       />
       {props.errorAttr.inputFileImage?.message && (
         <ErrorMessage errorMessage={props.errorAttr.inputFileImage.message} />

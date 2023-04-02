@@ -26,6 +26,7 @@ const CheckboxConsent: React.FC<CheckboxConsentProps> = (props) => {
           id="consent"
           className="consent__checkbox"
           type="checkbox"
+          data-testid="consent__checkbox"
         />
         I consent to my personal data
       </label>

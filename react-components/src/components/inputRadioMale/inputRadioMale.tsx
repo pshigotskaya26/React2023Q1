@@ -30,6 +30,7 @@ const InputRadioMale: React.FC<InputRadioMaleProps> = (props) => {
             })}
             type="radio"
             value={CardMaleEnum.MALE}
+            data-testid="radio-male"
           />
           {CardMaleEnum.MALE}
         </label>
@@ -46,6 +47,7 @@ const InputRadioMale: React.FC<InputRadioMaleProps> = (props) => {
             })}
             type="radio"
             value={CardMaleEnum.FEMALE}
+            data-testid="radio-female"
           />
           {CardMaleEnum.FEMALE}
         </label>

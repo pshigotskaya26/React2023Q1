@@ -17,6 +17,7 @@ const InputBirthday: React.FC<InputBirthdayProps> = (props) => {
         id="birthday"
         type="date"
         className="birthday__input"
+        data-testid="birthday__input"
         {...props.registerAttr('inputBirthday', {
           validate: (value) => {
             if (Date.parse(value) && Date.parse(value) <= Date.now()) {

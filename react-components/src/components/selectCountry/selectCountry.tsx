@@ -16,6 +16,7 @@ const SelectCountry: React.FC<SelectCountryProps> = (props) => {
       <label htmlFor="country">Country:</label>
       <select
         className="country__select"
+        data-testid="country__select"
         {...props.registerAttr('selectCountry', {
           validate: (value) => {
             if (value === '') {

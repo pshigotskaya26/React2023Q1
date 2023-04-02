@@ -100,7 +100,9 @@ export const Form: React.FC<FormProps> = (props) => {
         </div>
       </div>
       <div className="my-form__button">
-        <button className="btn btn-submit">Submit</button>
+        <button data-testid="my-form-button" className="btn btn-submit">
+          Submit
+        </button>
       </div>
     </form>
   );
