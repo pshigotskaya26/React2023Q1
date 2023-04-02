@@ -19,10 +19,7 @@ describe('Tests for MyForm component', () => {
     const selectCountryNode = screen.getByTestId('country__select');
     const checkboxConsentNode = screen.getByTestId('consent__checkbox');
     const radioMaleNode = screen.getByTestId('radio-male');
-    const radioFemaleNode = screen.getByTestId('radio-female');
     const inputImageNode = screen.getByTestId('image__input');
-    const buttonSubmitNode = screen.getByTestId('my-form-button');
-
     const mockDataImage = new File(['house'], 'house.jpg', { type: 'image/jpg' });
 
     fireEvent.change(inputNameNode, { target: { value: 'Tanya' } });
