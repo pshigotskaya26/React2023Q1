@@ -11,7 +11,7 @@ export interface ICharacter {
   origin: ICharacterOrigin;
   gender: string;
   species: string;
-  status?: string;
+  status: string;
   type: string;
   url: string;
 }
