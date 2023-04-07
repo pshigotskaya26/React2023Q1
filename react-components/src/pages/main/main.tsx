@@ -11,7 +11,7 @@ const Home = () => {
   const [error, setError] = useState<string>('');
 
   const getApiData = async () => {
-    await fetch('https://rickandmortyapi.com/api/character')
+    await fetch('https://rickandmortyapi.com/api/character12')
       .then((response) => {
         console.log(response);
         if (!response.ok) {
@@ -22,6 +22,7 @@ const Home = () => {
       .then((data: IDataAPI) => {
         setApiDAta(data);
         setIsLoading(false);
+        setError('');
       })
       .catch((err: Error) => {
         setError(err.message);
