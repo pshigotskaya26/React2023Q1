@@ -11,3 +11,8 @@
   background-repeat: no-repeat;
   min-height: 64px;
 }
+
+.error-fetch {
+  padding-bottom: 30px;
+  color: #ff0000;
+}
