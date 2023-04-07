@@ -5,7 +5,9 @@ const Search = () => {
   const [searchValue, setSearchValue] = useState<string>(localStorage.getItem('searchValue') || '');
 
   useEffect(() => {
+    console.log('useeffect search');
     return () => {
+      console.log('useeffect search return');
       localStorage.setItem('searchValue', searchValue);
     };
   });
