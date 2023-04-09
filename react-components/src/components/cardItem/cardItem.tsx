@@ -29,8 +29,9 @@ const CardItem: React.FC<CardItemProps> = (props) => {
           />
         </div>
         <div className="card-item__content">
-          <h3 className="card-item__title">{props.product.name}</h3>
-          <div className="card-item__description"></div>
+          <h3 className="card-item__title" data-testid="card-item__title">
+            {props.product.name}
+          </h3>
         </div>
       </div>
       {isModal && <CardItemModal updateIsModal={updateIsModal} idCardItem={props.product.id} />}
