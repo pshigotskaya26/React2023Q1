@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './index.css';
 import Search from '../../components/search/search';
 import CardsList from '../../components/cardsList/cardsList';
@@ -12,7 +12,7 @@ const Home = () => {
     localStorage.getItem('searchValue') || ''
   );
 
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
   const updateSearchValue = (searchValue: string) => {
@@ -47,7 +47,7 @@ const Home = () => {
     }, 3000);
   };
 
-  const getFilteredApiData = () => {
+  const getFilteredApiData = useCallback(() => {
     if (searchInputValue !== '') {
       setTimeout(async () => {
         await fetch(`https://rickandmortyapi.com/api/character/?name=${searchInputValue}`)
@@ -68,9 +68,9 @@ const Home = () => {
           });
       });
     }
-  };
+  }, [searchInputValue]);
 
-  useEffect(() => {
+  const checkSearch = useCallback(() => {
     if (searchInputValue !== '') {
       getFilteredApiData();
       setApiDAta(undefined);
@@ -78,7 +78,11 @@ const Home = () => {
       getApiData();
       setFilteredApiData(undefined);
     }
-  }, [searchInputValue]);
+  }, [searchInputValue, getFilteredApiData]);
+
+  useEffect(() => {
+    checkSearch();
+  }, [checkSearch]);
 
   return (
     <section className="home">

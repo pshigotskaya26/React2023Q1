@@ -14,10 +14,6 @@ const Search: React.FC<SearchProps> = (props) => {
     setSearchValue(value);
   };
 
-  const handleInputSearchClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-  };
-
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
     localStorage.setItem('searchValue', searchValue);

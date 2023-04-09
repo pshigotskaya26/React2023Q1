@@ -1,11 +1,7 @@
 import React from 'react';
 import './index.css';
 import CardItem from '../../components/cardItem/cardItem';
-import productsData from '../../data/products.json';
-import { IProduct } from 'types/interfaces/IProduct';
 import { ICharacter } from '../../types/interfaces/ICharacter';
-
-//const products: IProduct[] = productsData;
 
 interface CardsListProps {
   apiData: ICharacter[] | undefined;

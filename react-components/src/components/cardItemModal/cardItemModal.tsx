@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useCallback } from 'react';
 import './index.css';
 import { ICharacter } from '../../types/interfaces/ICharacter';
 
@@ -10,10 +10,9 @@ interface CardItemModalProps {
 const CardItemModal: React.FC<CardItemModalProps> = (props) => {
   const [apiDataSingleCard, setApiDataSingleCard] = useState<ICharacter>();
   const [errorModal, setErrorModal] = useState<string>('');
-  const [isLoadingModal, setIsLoadingModal] = useState<Boolean>(true);
-  let strEpisode = '';
+  const [isLoadingModal, setIsLoadingModal] = useState<boolean>(true);
 
-  const getApiDataSingleCard = () => {
+  const getApiDataSingleCard = useCallback(() => {
     setTimeout(async () => {
       await fetch(`https://rickandmortyapi.com/api/character/${props.idCardItem}`)
         .then((response) => {
@@ -32,10 +31,9 @@ const CardItemModal: React.FC<CardItemModalProps> = (props) => {
           setIsLoadingModal(false);
         });
     }, 3000);
-  };
+  }, [props.idCardItem]);
 
   const getEpisodes = (arrayEpisodes: string[]) => {
-    let str = '';
     const convertArray = arrayEpisodes.map((item) => {
       return item.slice(item.lastIndexOf('/') + 1);
     });
@@ -50,9 +48,6 @@ const CardItemModal: React.FC<CardItemModalProps> = (props) => {
   };
 
   const handleModalClose = (event: React.MouseEvent) => {
-    console.log('event.currentTarget: ', event.currentTarget);
-    console.log('event.Target: ', event.target);
-
     if (event.currentTarget) {
       props.updateIsModal(false);
     }
@@ -60,8 +55,7 @@ const CardItemModal: React.FC<CardItemModalProps> = (props) => {
 
   useEffect(() => {
     getApiDataSingleCard();
-  }, []);
-  console.log('apiDataSingleCard: ', apiDataSingleCard);
+  }, [getApiDataSingleCard]);
 
   return (
     <Fragment>
