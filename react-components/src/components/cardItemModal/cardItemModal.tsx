@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './index.css';
 import { ICharacter } from '../../types/interfaces/ICharacter';
 
 interface CardItemModalProps {
   idCardItem: number;
+  updateIsModal: (val: boolean) => void;
 }
 
 const CardItemModal: React.FC<CardItemModalProps> = (props) => {
@@ -42,15 +43,32 @@ const CardItemModal: React.FC<CardItemModalProps> = (props) => {
     return convertArray.join(', ');
   };
 
+  const handleBurgerClose = (event: React.MouseEvent) => {
+    if (event.currentTarget) {
+      props.updateIsModal(false);
+    }
+  };
+
+  const handleModalClose = (event: React.MouseEvent) => {
+    console.log('event.currentTarget: ', event.currentTarget);
+    console.log('event.Target: ', event.target);
+
+    if (event.currentTarget) {
+      props.updateIsModal(false);
+    }
+  };
+
   useEffect(() => {
     getApiDataSingleCard();
   }, []);
   console.log('apiDataSingleCard: ', apiDataSingleCard);
 
   return (
-    <div className="modal">
+    <Fragment>
+      <div className="modal" onClick={handleModalClose}></div>
+
       <div className="modal-content">
-        <div className="modal__burger">
+        <div className="modal__burger" onClick={handleBurgerClose}>
           <div className="burger-close">
             <span></span>
           </div>
@@ -105,7 +123,7 @@ const CardItemModal: React.FC<CardItemModalProps> = (props) => {
           </div>
         )}
       </div>
-    </div>
+    </Fragment>
   );
 };
 

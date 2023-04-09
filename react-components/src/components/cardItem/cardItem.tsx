@@ -15,6 +15,11 @@ const CardItem: React.FC<CardItemProps> = (props) => {
     setIsModal(true);
     console.log('click');
   };
+
+  const updateIsModal = (booleanValue: boolean) => {
+    setIsModal(booleanValue);
+  };
+
   return (
     <Fragment>
       <div className="card-item" onClick={handleClickCardItem}>
@@ -53,7 +58,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
           </div>
         </div>
       </div>
-      {isModal && <CardItemModal idCardItem={props.product.id} />}
+      {isModal && <CardItemModal updateIsModal={updateIsModal} idCardItem={props.product.id} />}
     </Fragment>
   );
 };
