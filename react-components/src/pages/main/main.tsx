@@ -4,8 +4,13 @@ import Search from '../../components/search/search';
 import CardsList from '../../components/cardsList/cardsList';
 import Header from '../../components/header/header';
 import { IDataAPI } from '../../types/interfaces/IDataAPI';
+import { useGetProductsQuery } from '../../store/product/product.api';
+import { store } from '../../store/store';
+
+import { serchTextReducer } from '../../store/searchText/searchText.slice';
 
 const Home = () => {
+  /*
   const [apiData, setApiDAta] = useState<IDataAPI>();
   const [filteredApiData, setFilteredApiData] = useState<IDataAPI>();
   const [searchInputValue, setSearchInputValue] = useState<string>(
@@ -84,19 +89,30 @@ const Home = () => {
     checkSearch();
   }, [checkSearch]);
 
+  */
+
+  const { data, isLoading, isFetching, isError } = useGetProductsQuery();
+  console.log('store: ', store);
+  console.log('serchTextReducer: ', serchTextReducer);
+  const stateSearchText = store.getState().searchText;
+  console.log('stateSearchText: ', stateSearchText);
+
   return (
     <section className="home">
       <Header />
       <div className="container">
         <h1 className="home__title">Home</h1>
-        <Search searchInputValue={searchInputValue} updateSearchValue={updateSearchValue} />
+        <Search searchInputValue={stateSearchText} />
         {isLoading && <div className="loader">Loading...</div>}
-        {error && <div className="error-fetch">{error}</div>}
-        {searchInputValue ? (
+        {/* {error && <div className="error-fetch">{error}</div>} */}
+        {isError && <div className="error-fetch">Could not fatch the api data</div>}
+        {/* {searchInputValue ? (
           <CardsList apiData={filteredApiData?.results} />
         ) : (
           <CardsList apiData={apiData?.results} />
-        )}
+        )} */}
+
+        <CardsList apiData={data?.results} />
       </div>
     </section>
   );
