@@ -9,7 +9,6 @@ export const formSubmissionSlice = createSlice({
   reducers: {
     addProductForm: (state, action: PayloadAction<IProductForm>) => {
       state.push(action.payload);
-      // return (state = action.payload);
     },
   },
 });

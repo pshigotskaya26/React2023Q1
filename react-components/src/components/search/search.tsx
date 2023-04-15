@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
-
 import { useActions } from '../../hooks/useActions';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 interface SearchProps {
   searchInputValue: string;
@@ -11,7 +9,6 @@ interface SearchProps {
 const Search: React.FC<SearchProps> = (props) => {
   const [searchValue, setSearchValue] = useState<string>(props.searchInputValue);
   const { addSerchText } = useActions();
-  const { searchText } = useTypedSelector((state) => state);
 
   const handleInputSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
