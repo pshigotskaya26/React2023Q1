@@ -8,6 +8,7 @@ import CheckboxConsent from '../checkboxConsent/checkboxConsent';
 import InputRadioMale from '../inputRadioMale/inputRadioMale';
 import InputFileImage from '../inputFileImage/inputFileImage';
 import { IProductForm } from '../../types/interfaces/IProductForm';
+import { useActions } from '../../hooks/useActions';
 
 export interface FormInputs {
   inputName: string;
@@ -20,10 +21,11 @@ export interface FormInputs {
 
 interface FormProps {
   cards: IProductForm[];
-  updateData: (value: IProductForm[]) => void;
 }
 
 export const Form: React.FC<FormProps> = (props) => {
+  const { addProductForm } = useActions();
+
   const {
     register,
     formState: { errors, isSubmitSuccessful },
@@ -64,7 +66,9 @@ export const Form: React.FC<FormProps> = (props) => {
       thumbnail: image,
     };
 
-    props.updateData(props.cards.concat([card]));
+    addProductForm(card);
+
+    //props.updateData(props.cards.concat([card]));
   };
 
   useEffect(() => {
