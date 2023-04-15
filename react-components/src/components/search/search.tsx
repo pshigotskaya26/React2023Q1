@@ -6,7 +6,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 interface SearchProps {
   searchInputValue: string;
-  //   //updateSearchValue: (value: string) => void;
 }
 
 const Search: React.FC<SearchProps> = (props) => {
@@ -21,13 +20,9 @@ const Search: React.FC<SearchProps> = (props) => {
 
   const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
-
-    //store.dispatch(addSerchText(searchValue));
     addSerchText(searchValue);
   };
 
-  //const stateSearchText = store.getState().searchText;
-  console.log('searchText: ', searchText);
   return (
     <div className="search">
       <div className="search__container">

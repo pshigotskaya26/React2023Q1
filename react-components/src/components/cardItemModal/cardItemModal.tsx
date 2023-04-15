@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState, useCallback } from 'react';
+import React, { Fragment } from 'react';
 import './index.css';
-import { ICharacter } from '../../types/interfaces/ICharacter';
+import { useGetSingleProductQuery } from '../../store/singleProduct/singleProduct.api';
 
 interface CardItemModalProps {
   idCardItem: number;
@@ -8,31 +8,6 @@ interface CardItemModalProps {
 }
 
 const CardItemModal: React.FC<CardItemModalProps> = (props) => {
-  const [apiDataSingleCard, setApiDataSingleCard] = useState<ICharacter>();
-  const [errorModal, setErrorModal] = useState<string>('');
-  const [isLoadingModal, setIsLoadingModal] = useState<boolean>(true);
-
-  const getApiDataSingleCard = useCallback(() => {
-    setTimeout(async () => {
-      await fetch(`https://rickandmortyapi.com/api/character/${props.idCardItem}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw Error('Could not fatch the api data');
-          }
-          return response.json();
-        })
-        .then((data: ICharacter) => {
-          setApiDataSingleCard(data);
-          setIsLoadingModal(false);
-          setErrorModal('');
-        })
-        .catch((err: Error) => {
-          setErrorModal(err.message);
-          setIsLoadingModal(false);
-        });
-    }, 3000);
-  }, [props.idCardItem]);
-
   const getEpisodes = (arrayEpisodes: string[]) => {
     const convertArray = arrayEpisodes.map((item) => {
       return item.slice(item.lastIndexOf('/') + 1);
@@ -53,10 +28,7 @@ const CardItemModal: React.FC<CardItemModalProps> = (props) => {
     }
   };
 
-  useEffect(() => {
-    getApiDataSingleCard();
-  }, [getApiDataSingleCard]);
-
+  const { data, isLoading, isError } = useGetSingleProductQuery(props.idCardItem);
   return (
     <Fragment>
       <div className="modal" onClick={handleModalClose}></div>
@@ -68,50 +40,46 @@ const CardItemModal: React.FC<CardItemModalProps> = (props) => {
           </div>
         </div>
         <h3 className="modal__title">Detail information: </h3>
-        {errorModal && <div className="error-fetch">{errorModal}</div>}
-        {isLoadingModal && <div className="loader">Loading...</div>}
-        {apiDataSingleCard && (
+        {isError && <div className="error-fetch">Could not fatch the api data</div>}
+        {isLoading && <div className="loader">Loading...</div>}
+        {data && (
           <div className="modal__description">
             <div className="modal__image">
-              <img
-                className="modal-image"
-                src={`${apiDataSingleCard.image}`}
-                alt={`${apiDataSingleCard.name}`}
-              />
+              <img className="modal-image" src={`${data.image}`} alt={`${data.name}`} />
             </div>
             <div className="modal__info">
-              <h4 className="modal__subtitle">{apiDataSingleCard.name}</h4>
+              <h4 className="modal__subtitle">{data.name}</h4>
               <p className="modal__text">
                 <span className="modal__item">ID: </span>
-                {apiDataSingleCard.id}
+                {data.id}
               </p>
               <p className="modal__text">
                 <span className="modal__item">Status: </span>
-                {apiDataSingleCard.status}
+                {data.status}
               </p>
               <p className="modal__text">
                 <span className="modal__item">Species: </span>
-                {apiDataSingleCard.species}
+                {data.species}
               </p>
               <p className="modal__text">
                 <span className="modal__item">Location: </span>
-                {apiDataSingleCard.location.name}
+                {data.location.name}
               </p>
               <p className="modal__text">
                 <span className="modal__item">Type: </span>
-                {apiDataSingleCard.type}
+                {data.type}
               </p>
               <p className="modal__text">
                 <span className="modal__item">Created: </span>
-                {new Date(apiDataSingleCard.created).toLocaleDateString()}
+                {new Date(data.created).toLocaleDateString()}
               </p>
               <p className="modal__text">
                 <span className="modal__item">Gender: </span>
-                {apiDataSingleCard.gender}
+                {data.gender}
               </p>
               <p className="modal__text">
                 <span className="modal__item">Episode: </span>
-                {getEpisodes(apiDataSingleCard.episode)}
+                {getEpisodes(data.episode)}
               </p>
             </div>
           </div>
