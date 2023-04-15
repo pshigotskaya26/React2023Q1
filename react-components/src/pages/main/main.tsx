@@ -1,13 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import './index.css';
 import Search from '../../components/search/search';
 import CardsList from '../../components/cardsList/cardsList';
 import Header from '../../components/header/header';
-import { IDataAPI } from '../../types/interfaces/IDataAPI';
-import { useGetProductsQuery } from '../../store/product/product.api';
-import { store } from '../../store/store';
-
-import { serchTextReducer } from '../../store/searchText/searchText.slice';
+import { useGetProductsQuery, useGetSearchProductsQuery } from '../../store/product/product.api';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const Home = () => {
   /*
@@ -91,28 +88,63 @@ const Home = () => {
 
   */
 
-  const { data, isLoading, isFetching, isError } = useGetProductsQuery();
-  console.log('store: ', store);
-  console.log('serchTextReducer: ', serchTextReducer);
-  const stateSearchText = store.getState().searchText;
-  console.log('stateSearchText: ', stateSearchText);
+  const { searchText } = useTypedSelector((state) => state);
 
+  // const stateSearchText = store.getState().searchText;
+
+  const {
+    data: productsData,
+    isLoading: productsIsLoading,
+    isFetching: productsIsFetching,
+    isError: productsIsError,
+  } = useGetProductsQuery();
+
+  const {
+    data: searchProductsData,
+    isLoading: searchProductsIsLoading,
+    isFetching: searchProductsIsFetching,
+    isError: searchProductsIsError,
+  } = useGetSearchProductsQuery(searchText);
+
+  console.log('stateSearchText from main store.getState(): ', searchText);
+  console.log('productsIsFetching: ', productsIsFetching);
+  console.log('searchProductsIsFetching: ', searchProductsIsFetching);
   return (
     <section className="home">
       <Header />
       <div className="container">
         <h1 className="home__title">Home</h1>
-        <Search searchInputValue={stateSearchText} />
-        {isLoading && <div className="loader">Loading...</div>}
+        <Search searchInputValue={searchText} />
+
+        {/* {productsIsLoading && <div className="loader">Loading...</div>}
+        {searchProductsIsLoading && <div className="loader">Loading...</div>}
+	
+        {productsIsError && <div className="error-fetch">Could not fatch the api data</div>}
+        {searchProductsIsError && <div className="error-fetch">Could not fatch the api data</div>} */}
+        {/* {isLoading && <div className="loader">Loading...</div>} */}
         {/* {error && <div className="error-fetch">{error}</div>} */}
-        {isError && <div className="error-fetch">Could not fatch the api data</div>}
+        {/* {isError && <div className="error-fetch">Could not fatch the api data</div>} */}
+        {searchText ? (
+          searchProductsIsLoading ? (
+            <div className="loader">Loading...</div>
+          ) : searchProductsIsError ? (
+            <div className="error-fetch">Could not fatch the api data</div>
+          ) : (
+            <CardsList apiData={searchProductsData?.results} />
+          )
+        ) : productsIsLoading ? (
+          <div className="loader">Loading...</div>
+        ) : productsIsError ? (
+          <div className="error-fetch">Could not fatch the api data</div>
+        ) : (
+          <CardsList apiData={productsData?.results} />
+        )}
         {/* {searchInputValue ? (
           <CardsList apiData={filteredApiData?.results} />
         ) : (
           <CardsList apiData={apiData?.results} />
         )} */}
-
-        <CardsList apiData={data?.results} />
+        {/* <CardsList apiData={data?.results} /> */}
       </div>
     </section>
   );
