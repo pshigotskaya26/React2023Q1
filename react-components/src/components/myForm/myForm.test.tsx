@@ -2,17 +2,27 @@ import React from 'react';
 import { describe, it } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import MyForm from './myForm';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 describe('Tests for MyForm component', () => {
   it('Has Input name', () => {
-    render(<MyForm />);
+    render(
+      <Provider store={store}>
+        <MyForm />
+      </Provider>
+    );
     const inputNode = screen.getByTestId('name__input');
     inputNode.textContent = 'John';
     expect(inputNode.textContent).toBe('John');
   });
 
   it('Are form fields valid', () => {
-    render(<MyForm />);
+    render(
+      <Provider store={store}>
+        <MyForm />
+      </Provider>
+    );
 
     const inputNameNode = screen.getByTestId('name__input');
     const inputBirthdayNode = screen.getByTestId('birthday__input');
