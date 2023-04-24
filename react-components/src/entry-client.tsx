@@ -14,4 +14,3 @@ hydrateRoot(
     </Provider>
   </BrowserRouter>
 );
-console.log('HYDRATE-------------------');
