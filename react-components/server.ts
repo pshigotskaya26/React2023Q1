@@ -1,4 +1,3 @@
-import React from 'react';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -23,11 +22,7 @@ async function createServer() {
     appType: 'custom',
   });
 
-  //const { render } = await vite.ssrLoadModule('./src/entry-server.tsx');
-
   app.use(vite.middlewares);
-
-  // app.use('/assets', express.static(path.resolve(__dirname, './dist/client/assets')));
 
   app.use('*', async (req, res) => {
     const url = req.originalUrl;
@@ -38,8 +33,9 @@ async function createServer() {
 
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
       const appHtml = await render(url);
+      template.replace(`<!--ssr-outlet-->`, appHtml);
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      //const html = template.replace(`<!--ssr-outlet-->`, appHtml);
 
       const parts = template.split('<!--ssr-outlet-->');
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
-import { WrappedApp } from './App';
 import { App } from './App';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
