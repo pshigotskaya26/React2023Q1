@@ -3,16 +3,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
-//import { render } from './src/entry-server';
-
-//const DEV_ENV = 'development';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3001;
-
-//const html = fs.readFileSync(path.resolve(__dirname, 'index.html')).toString();
-//console.log('html: ', html);
-//const parts = html.split('<!--ssr-outlet-->');
 
 async function createServer() {
   const app = express();
@@ -28,18 +21,12 @@ async function createServer() {
     const url = req.originalUrl;
     try {
       let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
-
       template = await vite.transformIndexHtml(url, template);
 
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
       const appHtml = await render(url);
       template.replace(`<!--ssr-outlet-->`, appHtml);
-
-      //const html = template.replace(`<!--ssr-outlet-->`, appHtml);
-
       const parts = template.split('<!--ssr-outlet-->');
-
-      //res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
 
       res.write(parts[0]);
 
