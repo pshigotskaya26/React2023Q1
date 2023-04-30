@@ -3,12 +3,12 @@ import { describe, it } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import Search from './search';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { initStore } from '../../store/store';
 
 describe('Tests for Search component', () => {
   it('Renders component WrappedApp', () => {
     render(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <Search searchInputValue="bob" />
       </Provider>
     );

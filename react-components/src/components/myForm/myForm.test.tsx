@@ -3,12 +3,12 @@ import { describe, it } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import MyForm from './myForm';
 import { Provider } from 'react-redux';
-import { store } from '../../store/store';
+import { initStore } from '../../store/store';
 
 describe('Tests for MyForm component', () => {
   it('Has Input name', () => {
     render(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <MyForm />
       </Provider>
     );
@@ -19,7 +19,7 @@ describe('Tests for MyForm component', () => {
 
   it('Are form fields valid', () => {
     render(
-      <Provider store={store}>
+      <Provider store={initStore()}>
         <MyForm />
       </Provider>
     );
