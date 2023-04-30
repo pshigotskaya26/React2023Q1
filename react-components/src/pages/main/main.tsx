@@ -8,7 +8,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const Home = () => {
   const { searchText } = useTypedSelector((state) => state);
-  // console.log(store.getState());
 
   const {
     data: productsData,
