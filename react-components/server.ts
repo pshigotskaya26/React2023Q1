@@ -39,7 +39,6 @@ async function createServer() {
       );
 
       const [stream] = await render(req.originalUrl, {
-        bootstrapScripts: ['./src/entry-client.tsx'],
         onShellReady() {
           stream.pipe(res);
         },
