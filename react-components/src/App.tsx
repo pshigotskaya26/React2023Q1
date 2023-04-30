@@ -24,9 +24,5 @@ export const App = () => {
 };
 
 export const WrappedApp = () => {
-  return (
-    //     <Router>
-    <App />
-    //     </Router>
-  );
+  return <App />;
 };

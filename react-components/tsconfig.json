@@ -4,7 +4,6 @@
     "lib": ["dom", "esnext", "dom.iterable"],
     "jsx": "react",
     "module": "esnext",
-    //"outDir": "dist",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
