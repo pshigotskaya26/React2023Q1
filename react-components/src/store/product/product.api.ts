@@ -1,5 +1,15 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  buildCreateApi,
+  coreModule,
+  fetchBaseQuery,
+  reactHooksModule,
+} from '@reduxjs/toolkit/query/react';
 import { IDataAPI } from '../../types/interfaces/IDataAPI';
+
+const createApi = buildCreateApi(
+  coreModule(),
+  reactHooksModule({ unstable__sideEffectsInRender: true })
+);
 
 export const productApi = createApi({
   reducerPath: 'searchResults',

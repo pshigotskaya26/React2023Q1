@@ -8,6 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3001;
 
 async function createServer() {
+  console.log('SERVER');
   const app = express();
 
   const vite = await createViteServer({
@@ -21,19 +22,36 @@ async function createServer() {
     const url = req.originalUrl;
     try {
       let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8');
+      // console.log('template: ', template);
       template = await vite.transformIndexHtml(url, template);
 
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
-      const appHtml = await render(url);
+      // console.log('render--------------------: ', render);
+      const [appHtml, preloadedState] = await render(url);
+      //  console.log('appHtml: ', appHtml);
       template.replace(`<!--ssr-outlet-->`, appHtml);
       const parts = template.split('<!--ssr-outlet-->');
 
-      res.write(parts[0]);
+      console.log('----parts[0]: ', parts[0]);
+      console.log('----parts[1]: ', parts[1]);
+      // res.write(parts[0]);
+      res.write(
+        parts[0] +
+          `<script>
+             window["__PRELOADED_STATE__"] = ${JSON.stringify(preloadedState).replace(
+               /</g,
+               '\\u003c'
+             )}
+           </script>`
+      );
 
-      const stream = render(req.originalUrl, {
+      const [stream] = await render(req.originalUrl, {
         bootstrapScripts: ['./src/entry-client.tsx'],
         onShellReady() {
+          //   res.write(parts[0]);
           stream.pipe(res);
+
+          // res.send(template);
         },
         onShellError() {},
         onAllReady() {

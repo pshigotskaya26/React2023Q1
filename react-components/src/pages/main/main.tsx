@@ -5,9 +5,11 @@ import CardsList from '../../components/cardsList/cardsList';
 import Header from '../../components/header/header';
 import { useGetProductsQuery, useGetSearchProductsQuery } from '../../store/product/product.api';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { initStore, RootState } from '../../store/store';
 
 const Home = () => {
   const { searchText } = useTypedSelector((state) => state);
+  // console.log(store.getState());
 
   const {
     data: productsData,
