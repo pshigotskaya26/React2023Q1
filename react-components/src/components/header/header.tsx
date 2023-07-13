@@ -1,18 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './index.css';
 
 const Header = () => {
-  const pathPage = window.location.pathname.slice(1);
+  const location = useLocation();
 
   return (
     <header className="header">
       <div className="container header__container">
-        {pathPage === '' ? (
+        {location.pathname === '/' ? (
           <h2 data-testid="header__title">Current page: Home</h2>
-        ) : pathPage === 'about' ? (
+        ) : location.pathname === '/about' ? (
           <h2 data-testid="header__title">Current page: About us</h2>
-        ) : pathPage === 'form' ? (
+        ) : location.pathname === '/form' ? (
           <h2>Current page: Form</h2>
         ) : (
           <h2 data-testid="header__title">Current page: Not Found</h2>

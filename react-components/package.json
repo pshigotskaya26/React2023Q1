@@ -1,12 +1,12 @@
 {
   "name": "react-components",
-  "homepage": "https://pshigotskaya26.github.io/React2023Q1/react-components/",
+  "homepage": "https://pshigotskaya26.github.io/React2023Q1",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -14,7 +14,7 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint . --ext .tsx --ext .ts",
     "lint-fix": "eslint . --ext .tsx --ext .ts --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write ."
   },
   "husky": {
     "hooks": {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, HashRouter } from 'react-router-dom';
 import './App.css';
 import Footer from './components/footer/footer';
 import Home from './pages/main/main';
@@ -25,8 +25,8 @@ export const App = () => {
 
 export const WrappedApp = () => {
   return (
-    <Router>
+    <HashRouter>
       <App />
-    </Router>
+    </HashRouter>
   );
 };
