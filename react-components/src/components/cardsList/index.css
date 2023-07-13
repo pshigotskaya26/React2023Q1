@@ -1,6 +1,6 @@
 .cards__container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   column-gap: 35px;
   row-gap: 35px;
