@@ -1,0 +1,21 @@
+.about {
+  padding: 30px 0;
+}
+
+.about__subtitle {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.about__list {
+  padding-left: 50px;
+  list-style: circle;
+}
+
+.about__item {
+  padding-bottom: 10px;
+}
+
+.about__item:last-child {
+  padding-bottom: 0;
+}

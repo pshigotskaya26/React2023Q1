@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "title": "Steel Analog Couple Watches",
+    "price": 35,
+    "rating": 4.79,
+    "brand": "Eastern Watches",
+    "category": "womens-watches",
+    "thumbnail": "https://i.dummyjson.com/data/products/66/thumbnail.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Stainless Steel Women",
+    "price": 35,
+    "rating": 4.08,
+    "brand": "Bracelet",
+    "category": "womens-watches",
+    "thumbnail": "https://i.dummyjson.com/data/products/70/thumbnail.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Waterproof Leather Brand Watch",
+    "price": 46,
+    "rating": 4.05,
+    "brand": "SKMEI 9117",
+    "category": "mens-watches",
+    "thumbnail": "https://i.dummyjson.com/data/products/62/thumbnail.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Stylish Luxury Digital Watch",
+    "price": 57,
+    "rating": 4.55,
+    "brand": "Luxury Digital",
+    "category": "womens-watches",
+    "thumbnail": "https://i.dummyjson.com/data/products/68/thumbnail.webp"
+  },
+  {
+    "id": 5,
+    "title": "Fashion Magnetic Wrist Watch",
+    "price": 60,
+    "rating": 4.03,
+    "brand": "Eastern Watches",
+    "category": "womens-watches",
+    "thumbnail": "https://i.dummyjson.com/data/products/67/thumbnail.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Leather Straps Wristwatch",
+    "price": 120,
+    "rating": 4.63,
+    "brand": "Naviforce",
+    "category": "mens-watches",
+    "thumbnail": "https://i.dummyjson.com/data/products/61/thumbnail.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Royal Blue Premium Watch",
+    "price": 50,
+    "rating": 4.89,
+    "brand": "SKMEI 9117",
+    "category": "mens-watches",
+    "thumbnail": "https://i.dummyjson.com/data/products/63/thumbnail.webp"
+  }
+]
