@@ -14,12 +14,12 @@ const About = () => {
         </p>
         <h2 className="about__subtitle">Done:</h2>
         <ul className="about__list">
-          <li>
+          <li className="about__item">
             getting API data after sending the request to API with the searching parameters and
             getting the list of results is updating
           </li>
-          <li>validation the form using React Hook Form</li>
-          <li>
+          <li className="about__item">validation the form using React Hook Form</li>
+          <li className="about__item">
             saving all information when navigate between routes (Search, About and Form) using Redux
             Toolkit
           </li>
